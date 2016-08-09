@@ -1,5 +1,6 @@
 <?php
 
+/** @var \OnaWhiteAngus\Controller $controller */
 
 /* ========================================================================== 
  *	show 20 posts in search page
@@ -29,27 +30,6 @@ function basic_change_the_excerpt( $more ) {
 }
 
 add_action( 'excerpt_more', 'basic_change_the_excerpt' );
-/* ========================================================================== */
-
-
-/* ==========================================================================
- * echo custom css
- * ========================================================================== */
-function basic_print_custom_css_js() {
-
-	$css = basic_get_theme_option( 'custom_styles' );
-	$js  = basic_get_theme_option( 'head_scripts' );
-
-	if ( ! empty( $css ) ) {
-		echo "\n<style id='basic-custom-css'>" . $css . "</style>\n";
-	}
-	if ( ! empty( $js ) ) {
-		echo "\n" . wp_specialchars_decode( $js, ENT_QUOTES ) . "\n";
-	}
-
-}
-
-add_action( 'wp_head', 'basic_print_custom_css_js', 20 );
 /* ========================================================================== */
 
 

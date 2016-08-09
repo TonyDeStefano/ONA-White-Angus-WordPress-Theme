@@ -2,6 +2,7 @@
 
 if ( ! defined( 'BASIC_APP_NAME' ) ) {
 	$theme_name = sanitize_key( '' . wp_get_theme() );
+	die($theme_name);
 	define( 'BASIC_APP_NAME', $theme_name );
 }
 

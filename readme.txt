@@ -1,5 +1,5 @@
 === Basic ===
-Contributors: spokanetony
+Contributors: spokanetony, firedove
 Requires at least: WordPress 4.2
 Tested up to: WordPress 4.6
 Version: 1.0.0

@@ -1,29 +1,14 @@
-<?php 
-
-$no_sidebar = in_array( basic_get_layout(), array('full','center') );
-
-$class = ( basic_get_theme_option('show_sidebar') ) ? 'block' : '';
-$class = ( $no_sidebar && is_customize_preview() ) ? $class .' hide' : $class;
-
-?>
-
-<!-- BEGIN #sidebar -->
 <aside id="sidebar" class="<?php echo $class; ?>">
+
 	<ul id="widgetlist">
 
-    <?php if ( is_active_sidebar( 'sidebar' ) ) :
-        dynamic_sidebar( 'sidebar' );
-    else : ?>
+	    <?php if ( is_active_sidebar( 'sidebar' ) ) { ?>
 
-		<li class="widget widget_search">
-			<?php get_search_form(); ?>
-		</li>
+			<?php dynamic_sidebar( 'sidebar' ); ?>
 
-		<?php wp_list_categories('title_li=<p class="wtitle">'. __("Categories", 'ona-white-angus') .'</p>');  ?>
-
-	<?php endif; ?>
+		<?php } ?>
 
 	</ul>
+
 </aside>
-<!-- END #sidebar -->
 
