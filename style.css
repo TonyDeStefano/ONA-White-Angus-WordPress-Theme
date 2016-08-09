@@ -1,0 +1,257 @@
+/*
+ * Theme Name: ONA White Angus
+ * Description: Custom theme for the ONA White Angus website
+ * Theme URI: http://www.onawhiteangus.com
+ * Author: Spokane WordPress Development
+ * Author URI: http://www.onawhiteangus.com
+ * Version: 1.1.6
+ * License: GNU General Public License v2 or later
+ * License URI: http://www.gnu.org/licenses/gpl-2.0.html
+ * Tags: two-columns, one-column, full-width-template, left-sidebar, right-sidebar, custom-background, custom-colors, custom-header, custom-menu, editor-style, featured-images, sticky-post, threaded-comments, translation-ready, microformats
+ * Text Domain: ona-white-angus
+ */
+
+
+body {
+    font: 14px/140% 'Open Sans', Tahoma, Verdana, Segoe, sans-serif;
+    color: #3a3a3a;
+    word-wrap: break-word;
+}
+
+a {
+    color: #3a3a3a;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #936;
+}
+
+#ona-logo {
+    position: absolute;
+    left: 80px;
+    z-index: 2001;
+}
+
+#ona-logo img {
+    width: 322px;
+}
+
+.navbar-ona {
+    background-image: none;
+    text-transform: uppercase;
+    border: 0;
+    border-radius: 0;
+    margin-bottom: 0;
+}
+
+.navbar-ona a {
+    text-decoration: none;
+}
+
+.navbar-yellow {
+    background-color: #FC0;
+}
+
+.navbar-gray {
+    background-color: #3a3a3a;
+}
+
+.navbar-white {
+    background-color: #FFF;
+}
+
+.navbar-inverse.navbar-yellow.navbar-ona .navbar-nav > li > a,
+.navbar-inverse.navbar-white.navbar-ona .navbar-nav > li > a {
+    color: #3a3a3a !important;
+}
+
+.navbar-inverse.navbar-gray.navbar-ona .navbar-nav > li > a {
+    color: #FFF !important;
+}
+
+.navbar-inverse.navbar-white.navbar-ona .navbar-collapse {
+    text-align: center !important;
+}
+.navbar-inverse.navbar-white.navbar-ona .navbar-nav {
+    display: inline-block !important;
+    float: none !important;
+}
+
+.navbar-ona .container {
+    margin-right: 40px;
+}
+
+#cow-banner {
+    width: 100%;
+    border-bottom: 10px solid #FC0;
+    text-align: center;
+    position: relative;
+}
+
+#cow-banner img {
+    width: 100%;
+}
+
+.yellow-arrow-down {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    bottom: -25px;
+}
+
+.yellow-arrow-down i {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #FC0;
+    line-height: 40px;
+}
+
+.ona-content {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+}
+
+#call-to-action {
+    background-color: #3a3a3a;
+    margin-bottom: 15px;
+}
+
+#call-to-action .col-right {
+    background: #FC0 url('img/call-to-action-sep.png') no-repeat left center;
+    padding: 10px;
+    text-align: center;
+}
+
+#call-to-action .col-right a {
+    text-transform: uppercase;
+    color: #3a3a3a;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+#call-to-action .col-left {
+    padding: 10px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFF;
+    font-size: 20px;
+}
+
+#ona-footer {
+    background-color: #3a3a3a;
+    color: #FFF;
+}
+
+#ona-footer div {
+    text-align: center;
+}
+
+#ona-footer img {
+    width: 240px;
+}
+
+#ona-footer h3 {
+    text-transform: uppercase;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+#ona-footer i {
+    color: #3a3a3a;
+    width: 40px;
+    height: 40px;
+    background: #FFF;
+    border-radius: 20px;
+    font-size: 28px;
+    line-height: 40px;
+    margin: 4px;
+}
+
+#ona-copyright {
+    background: #3a3a3a;
+    padding: 15px;
+    width: 100%;
+    border-top: 10px solid #FC0;
+    text-align: center;
+    color: #FFF;
+}
+
+#ona-cows {
+    height: 100px;
+    background: url('img/cows.png');
+}
+
+.row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+@media only screen and (max-width : 1200px) {
+
+    #ona-logo {
+        top: 50px;
+        left: 0;
+    }
+
+    #ona-logo img {
+        width: 200px;
+    }
+}
+
+@media only screen and (max-width : 990px) {
+
+    .navbar-gray ul.navbar-nav {
+        margin-left: 140px;
+    }
+
+    .navbar-gray .container {
+        margin-right: 0;
+    }
+
+    #ona-logo img {
+        width: 180px;
+    }
+
+    #ona-footer div {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+}
+
+@media only screen and (max-width : 768px) {
+
+    #ona-logo {
+        top: 0;
+        left: 0;
+    }
+
+    #call-to-action .col-right {
+        background-image: none;
+    }
+
+    #ona-footer div {
+        text-align: center;
+    }
+}
+
+@media only screen and (max-width : 480px) {
+
+    #ona-logo {
+        left: 0;
+        top: 0;
+        width: 100%;
+        position: relative;
+    }
+
+    #ona-logo img {
+        width: 100%;
+    }
+
+    #cow-banner {
+        display: none;
+    }
+}
