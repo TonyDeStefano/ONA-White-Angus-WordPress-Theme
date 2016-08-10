@@ -241,6 +241,14 @@ a:hover {
     margin-bottom: 20px;
 }
 
+.ona-silhouette-text {
+    padding: 40px 0 40px 20px;
+}
+
+.ona-silhouette-text h2 {
+    font-size: 18px;
+}
+
 .ona-silhouette-over {
     position: absolute;
     width: 26px;
@@ -249,10 +257,6 @@ a:hover {
     border-radius: 13px;
     background-color: transparent;
     cursor: pointer;
-}
-
-.ona-silhouette-over:hover {
-    background-color: #FC0;
 }
 
 .ona-silhouette-over-1 {

@@ -37,6 +37,7 @@ class Controller {
 
 		wp_enqueue_script( 'ona-white-angus-bootstrap-js', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', array( 'jquery' ) );
 		wp_enqueue_script( 'ona-white-angus-font-awesome', 'https://use.fontawesome.com/0753562cc9.js', array() );
+		wp_enqueue_script( 'spokane-white-angus-js', get_template_directory_uri() . '/js/ona-white-angus.js', array( 'jquery' ), ( WP_DEBUG ) ? time() : self::VERSION_JS, TRUE );
 	}
 
 	public function editor_styles()

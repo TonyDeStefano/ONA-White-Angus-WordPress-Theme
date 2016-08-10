@@ -37,7 +37,7 @@
 	</div>
 </div>
 
-<div class="row ona-home-cow">
+<div class="row ona-home-cow hidden-xs">
 	<div class="col-md-12">
 		<h2>
 			Why the ONA White Angus has the advantage in warm climates<br>
@@ -48,24 +48,20 @@
 	</div>
 </div>
 
-<div class="row">
+<div class="row hidden-xs">
 	<div class="col-md-2"></div>
 	<div class="col-md-4">
 		<div id="ona-silhouette">
 			<img src="<?php bloginfo('template_directory'); ?>/img/silhouette.png">
-			<div class="ona-silhouette-over ona-silhouette-over-1"></div>
-			<div class="ona-silhouette-over ona-silhouette-over-2"></div>
-			<div class="ona-silhouette-over ona-silhouette-over-3"></div>
-			<div class="ona-silhouette-over ona-silhouette-over-4"></div>
-			<div class="ona-silhouette-over ona-silhouette-over-5"></div>
-			<div class="ona-silhouette-over ona-silhouette-over-6"></div>
-			<div class="ona-silhouette-over ona-silhouette-over-7"></div>
-			<div class="ona-silhouette-over ona-silhouette-over-8"></div>
-			<div class="ona-silhouette-over ona-silhouette-over-9"></div>
-			<div class="ona-silhouette-over ona-silhouette-over-10"></div>
-			<div class="ona-silhouette-over ona-silhouette-over-11"></div>
-			<div class="ona-silhouette-over ona-silhouette-over-12"></div>
+			<?php for ( $x = 1; $x <= 12; $x++ ) { ?>
+				<div class="ona-silhouette-over ona-silhouette-over-<?php echo $x; ?>" data-id="<?php echo $x; ?>"></div>
+			<?php } ?>
 		</div>
 	</div>
-	<div class="col-md-4"></div>
+	<div class="col-md-4">
+		<div class="ona-silhouette-text">
+			<h2></h2>
+			<p></p>
+		</div>
+	</div>
 </div>
