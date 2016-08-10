@@ -39,7 +39,7 @@ global $ona_controller;
 				<?php foreach ( $ona_controller->get_menu_items( \OnaWhiteAngus\Controller::MENU_SECONDARY ) AS $menu_item ) { ?>
 					<li>
 						<a href="<?php echo $menu_item->url; ?>">
-							<?php $menu_item->title; ?>
+							<?php echo $menu_item->title; ?>
 						</a>
 					</li>
 				<?php } ?>

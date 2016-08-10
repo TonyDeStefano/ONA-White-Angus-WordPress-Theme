@@ -19,31 +19,40 @@ global $ona_controller;
 
 		<main id="content">
 
-			<?php while ( have_posts() ) : the_post(); ?>
+			<?php if ( ! is_front_page() ) { ?>
 
-				<article class="page" id="pageid-<?php the_ID(); ?>">
+				<?php while ( have_posts() ) : the_post(); ?>
 
-					<?php do_action( 'basic_before_page_title' );  ?>
-					<?php if ( ! is_front_page() ) { ?>
+
+					<article class="page" id="pageid-<?php the_ID(); ?>">
+
+						<?php do_action( 'basic_before_page_title' );  ?>
+
 						<h1><?php the_title(); ?></h1>
-					<?php } ?>
-					<?php do_action( 'basic_after_page_title' );  ?>
 
-					<?php do_action( 'basic_before_page_content_box' );  ?>
-					<div class="entry-box clearfix">
-						<?php do_action( 'basic_before_page_content' );  ?>
-						<?php the_content(); ?>
-						<?php do_action( 'basic_after_page_content' );  ?>
-					</div>
-					<?php do_action( 'basic_after_page_content_box' );  ?>
+						<?php do_action( 'basic_after_page_title' );  ?>
 
-				</article>
+						<?php do_action( 'basic_before_page_content_box' );  ?>
+						<div class="entry-box clearfix">
+							<?php do_action( 'basic_before_page_content' );  ?>
+							<?php the_content(); ?>
+							<?php do_action( 'basic_after_page_content' );  ?>
+						</div>
+						<?php do_action( 'basic_after_page_content_box' );  ?>
 
-				<?php
+					</article>
 
-				if ( comments_open() || get_comments_number() ) { comments_template(); }
+					<?php
 
-			endwhile; ?>
+					if ( comments_open() || get_comments_number() ) { comments_template(); }
+
+				endwhile; ?>
+
+			<?php } else { ?>
+
+				<?php require_once ( 'includes/home.php' ); ?>
+
+			<?php } ?>
 
 		</main>
 
