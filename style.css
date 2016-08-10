@@ -203,6 +203,7 @@ a:hover {
 .btn-ona-yellow,
 .btn-ona-yellow:hover{
     color: #3A3A3A;
+    text-decoration: none;
     background-image: none;
     background-color: #FC0;
 }
