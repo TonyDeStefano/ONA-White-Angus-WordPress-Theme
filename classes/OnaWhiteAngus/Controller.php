@@ -205,7 +205,7 @@ class Controller {
 
 		$layout = get_post_meta( $post->ID, 'ona_page_layout', FALSE );
 
-		if ( $layout == 'leftbar' )
+		if ( $layout[0] == 'leftbar' )
 		{
 			return TRUE;
 		}
@@ -220,7 +220,7 @@ class Controller {
 
 		$layout = get_post_meta( $post->ID, 'ona_page_layout', FALSE );
 
-		if ( $layout == 'rightbar' )
+		if ( $layout[0] == 'rightbar' )
 		{
 			return TRUE;
 		}

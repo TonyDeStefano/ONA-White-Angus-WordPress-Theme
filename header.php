@@ -115,4 +115,3 @@ global $ona_controller;
 </div>
 
 <div class="ona-content">
-	

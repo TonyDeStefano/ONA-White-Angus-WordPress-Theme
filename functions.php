@@ -15,13 +15,3 @@ if ( is_admin() )
 {
 	add_action( 'add_meta_boxes', array( $ona_controller, 'page_layout_box' ) );
 }
-
-/* ==========================================================================
- *  Include libs
- * ========================================================================== */
-
-// hooks
-require_once( 'inc/hooks.php' );
-
-// Schema.org markup
-require_once( 'inc/schemaorg.php' );
