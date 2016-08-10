@@ -1,3 +1,10 @@
+<?php
+
+/** @var \OnaWhiteAngus\Controller $ona_controller */
+global $ona_controller;
+
+?>
+
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -22,17 +29,20 @@
 		</div>
 		<div id="navbar-3" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#">Home</a></li>
-				<li><a href="#">FAQ</a></li>
-				<li><a href="#">News & Events</a></li>
-				<li><a href="#">Member Sign In</a></li>
-				<li><a href="#">Contact</a></li>
-				<li><a href="#">+1-888-123-4567</a></li>
-				<li><a href="#">Marketplace</a></li>
-				<li><a href="#">About OWA</a></li>
-				<li><a href="#">Register Cattle</a></li>
-				<li><a href="#">Find a Breeder</a></li>
-				<li><a href="#">Member Resources</a></li>
+				<?php foreach ( $ona_controller->get_menu_items( \OnaWhiteAngus\Controller::MENU_MAIN ) AS $menu_item ) { ?>
+					<li>
+						<a href="<?php echo $menu_item->url; ?>">
+							<?php echo $menu_item->title; ?>
+						</a>
+					</li>
+				<?php } ?>
+				<?php foreach ( $ona_controller->get_menu_items( \OnaWhiteAngus\Controller::MENU_SECONDARY ) AS $menu_item ) { ?>
+					<li>
+						<a href="<?php echo $menu_item->url; ?>">
+							<?php var_dump($menu_item->title); ?>
+						</a>
+					</li>
+				<?php } ?>
 			</ul>
 		</div><!--/.nav-collapse -->
 	</div>
@@ -50,12 +60,13 @@
 		</div>
 		<div id="navbar-1" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#">Home</a></li>
-				<li><a href="#">FAQ</a></li>
-				<li><a href="#">News & Events</a></li>
-				<li><a href="#">Member Sign In</a></li>
-				<li><a href="#">Contact</a></li>
-				<li><a href="#">+1-888-123-4567</a></li>
+				<?php foreach ( $ona_controller->get_menu_items( \OnaWhiteAngus\Controller::MENU_MAIN ) AS $menu_item ) { ?>
+					<li>
+						<a href="<?php echo $menu_item->url; ?>">
+							<?php echo $menu_item->title; ?>
+						</a>
+					</li>
+				<?php } ?>
 			</ul>
 		</div><!--/.nav-collapse -->
 	</div>
@@ -73,11 +84,13 @@
 		</div>
 		<div id="navbar-2" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#">Marketplace</a></li>
-				<li><a href="#">About OWA</a></li>
-				<li><a href="#">Register Cattle</a></li>
-				<li><a href="#">Find a Breeder</a></li>
-				<li><a href="#">Member Resources</a></li>
+				<?php foreach ( $ona_controller->get_menu_items( \OnaWhiteAngus\Controller::MENU_SECONDARY ) AS $menu_item ) { ?>
+					<li>
+						<a href="<?php echo $menu_item->url; ?>">
+							<?php echo $menu_item->title; ?>
+						</a>
+					</li>
+				<?php } ?>
 			</ul>
 		</div><!--/.nav-collapse -->
 	</div>

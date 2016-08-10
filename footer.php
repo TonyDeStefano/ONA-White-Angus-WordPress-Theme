@@ -1,3 +1,10 @@
+<?php
+
+/** @var \OnaWhiteAngus\Controller $ona_controller */
+global $ona_controller;
+
+?>
+
 </div>
 
 <div id="call-to-action" class="row">
@@ -44,11 +51,13 @@
 		</div>
 		<div id="navbar-4" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
-				<li><a href="#">Marketplace</a></li>
-				<li><a href="#">About OWA</a></li>
-				<li><a href="#">Register Cattle</a></li>
-				<li><a href="#">Find a Breeder</a></li>
-				<li><a href="#">Member Resources</a></li>
+				<?php foreach ( $ona_controller->get_menu_items( \OnaWhiteAngus\Controller::MENU_SECONDARY ) AS $menu_item ) { ?>
+					<li>
+						<a href="<?php echo $menu_item->url; ?>">
+							<?php echo $menu_item->title; ?>
+						</a>
+					</li>
+				<?php } ?>
 			</ul>
 		</div><!--/.nav-collapse -->
 	</div>

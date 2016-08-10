@@ -12,6 +12,9 @@ class Controller {
 	const THEME_URI = 'http://www.onawhiteangus.com';
 	const OPTION_NAME = 'ona_theme_options_ona_white_angus';
 
+	const MENU_MAIN = 'ona_main_menu';
+	const MENU_SECONDARY = 'ona_secondary_menu';
+
 	public function theme_setup()
 	{
 		add_theme_support( 'automatic-feed-links' );
@@ -20,8 +23,8 @@ class Controller {
 		add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list', 'gallery', 'caption' ) );
 
 		register_nav_menus( array(
-			'main_menu'    => __( 'Main Menu', 'ona-white-angus' ),
-			'secondary_menu' => __( 'Secondary Menu', 'ona-white-angus' )
+			self::MENU_MAIN => __( 'ONA Main Menu', 'ona-white-angus' ),
+			self::MENU_SECONDARY => __( 'ONA Secondary Menu', 'ona-white-angus' )
 		) );
 	}
 
@@ -223,5 +226,19 @@ class Controller {
 		}
 
 		return FALSE;
+	}
+
+	/**
+	 * @param $menu
+	 *
+	 * @return \WP_Post[]
+	 */
+	public function get_menu_items( $menu )
+	{
+		$menu_locations = get_nav_menu_locations();
+		$menu = $menu_locations[ $menu ];
+		$menu = wp_get_nav_menu_items( $menu );
+
+		return ( $menu === FALSE ) ? array() : $menu;
 	}
 }
