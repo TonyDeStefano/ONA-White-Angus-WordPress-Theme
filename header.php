@@ -38,12 +38,6 @@
 	</div>
 </nav>
 
-<div id="ona-logo">
-	<a href="/">
-		<img src="<?php bloginfo('template_directory'); ?>/img/ona-white-angus-top-logo.png">
-	</a>
-</div>
-
 <nav class="navbar navbar-inverse navbar-ona navbar-yellow hidden-xs">
 	<div class="container">
 		<div class="navbar-header">
@@ -93,7 +87,18 @@
 	<div class="yellow-arrow-down">
 		<i class="fa fa-chevron-down" aria-hidden="true"></i>
 	</div>
-	<img src="<?php bloginfo('template_directory'); ?>/img/cow-banner.jpg">
+	<img src="<?php bloginfo('template_directory'); ?>/img/cow-banner.jpg" class="img">
+	<div id="ona-logo">
+		<a href="/">
+			<img src="<?php bloginfo('template_directory'); ?>/img/ona-white-angus-top-logo.png">
+		</a>
+	</div>
+</div>
+
+<div id="ona-logo-mobile">
+	<a href="/">
+		<img src="<?php bloginfo('template_directory'); ?>/img/ona-white-angus-top-logo.png">
+	</a>
 </div>
 
 <div class="ona-content">

@@ -33,22 +33,6 @@ add_action( 'excerpt_more', 'basic_change_the_excerpt' );
 /* ========================================================================== */
 
 
-/* ==========================================================================
- * echo custom script in footer from options
- * ========================================================================== */
-function basic_print_footer_js() {
-
-	$footer_js = basic_get_theme_option( 'footer_scripts' );
-
-	if ( ! empty( $footer_js ) ) {
-		echo "\n" . wp_specialchars_decode( $footer_js, ENT_QUOTES ) . "\n";
-	}
-
-}
-
-add_action( 'wp_footer', 'basic_print_footer_js' );
-/* ========================================================================== */
-
 
 /* ==========================================================================
  * add social button to the_content
