@@ -39,12 +39,12 @@ global $ona_controller;
 				<?php foreach ( $ona_controller->get_menu_items( \OnaWhiteAngus\Controller::MENU_SECONDARY ) AS $menu_item ) { ?>
 					<li>
 						<a href="<?php echo $menu_item->url; ?>">
-							<?php var_dump($menu_item->title); ?>
+							<?php $menu_item->title; ?>
 						</a>
 					</li>
 				<?php } ?>
 			</ul>
-		</div><!--/.nav-collapse -->
+		</div>
 	</div>
 </nav>
 
@@ -68,7 +68,7 @@ global $ona_controller;
 					</li>
 				<?php } ?>
 			</ul>
-		</div><!--/.nav-collapse -->
+		</div>
 	</div>
 </nav>
 
@@ -92,7 +92,7 @@ global $ona_controller;
 					</li>
 				<?php } ?>
 			</ul>
-		</div><!--/.nav-collapse -->
+		</div>
 	</div>
 </nav>
 

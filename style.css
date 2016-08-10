@@ -204,7 +204,6 @@ a:hover {
 
     #ona-logo {
         top: 0;
-        left: 0;
     }
 }
 
@@ -221,7 +220,7 @@ a:hover {
     #ona-logo {
         top: 0;
         left: 0;
-        text-align: left;
+        text-align: center;
     }
 
     #ona-logo img {

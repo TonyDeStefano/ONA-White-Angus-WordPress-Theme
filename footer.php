@@ -59,7 +59,7 @@ global $ona_controller;
 					</li>
 				<?php } ?>
 			</ul>
-		</div><!--/.nav-collapse -->
+		</div>
 	</div>
 </nav>
 
