@@ -9,8 +9,8 @@
             $(this).css('background-color','#FC0');
             var id = $(this).data('id');
             var text = $('.ona-silhouette-text');
-            text.find('h2').text(id + '. Something something something');
-            text.find('p').text('Some more stuff that is really interesting ...');
+            text.find('h2').text($(this).data('title'));
+            text.find('p').text($(this).data('content'));
         });
 
     });

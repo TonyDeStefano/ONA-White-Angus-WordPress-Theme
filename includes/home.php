@@ -37,31 +37,42 @@
 	</div>
 </div>
 
-<div class="row ona-home-cow hidden-xs">
-	<div class="col-md-12">
-		<h2>
-			Why the ONA White Angus has the advantage in warm climates<br>
-			<small>
-				Hover over each circle below to find out
-			</small>
-		</h2>
-	</div>
-</div>
+<?php if ( \OnaWhiteAngus\HoverCow::getHoverCowCount() > 0 ) { ?>
 
-<div class="row hidden-xs">
-	<div class="col-md-2"></div>
-	<div class="col-md-4">
-		<div id="ona-silhouette">
-			<img src="<?php bloginfo('template_directory'); ?>/img/silhouette.png">
-			<?php for ( $x = 1; $x <= 12; $x++ ) { ?>
-				<div class="ona-silhouette-over ona-silhouette-over-<?php echo $x; ?>" data-id="<?php echo $x; ?>"></div>
-			<?php } ?>
+	<div class="row ona-home-cow hidden-xs">
+		<div class="col-md-12">
+			<h2>
+				Why the ONA White Angus has the advantage in warm climates<br>
+				<small>
+					Hover over each circle below to find out
+				</small>
+			</h2>
 		</div>
 	</div>
-	<div class="col-md-4">
-		<div class="ona-silhouette-text">
-			<h2></h2>
-			<p></p>
+
+	<div class="row hidden-xs">
+		<div class="col-md-2"></div>
+		<div class="col-md-4">
+			<div id="ona-silhouette">
+				<img src="<?php bloginfo('template_directory'); ?>/img/silhouette.png">
+				<?php for ( $x = 1; $x <= 12; $x++ ) { ?>
+					<?php $hover_cow = new \OnaWhiteAngus\HoverCow( $x ); ?>
+					<?php if ( $hover_cow->hasData() ) { ?>
+						<div
+							class="ona-silhouette-over ona-silhouette-over-<?php echo $x; ?>"
+							data-id="<?php echo $x; ?>"
+							data-title="<?php echo esc_html( $hover_cow->getTitle() ); ?>"
+							data-content="<?php echo esc_html( $hover_cow->getContent() ); ?>"></div>
+					<?php } ?>
+				<?php } ?>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="ona-silhouette-text">
+				<h2></h2>
+				<p></p>
+			</div>
 		</div>
 	</div>
-</div>
+
+<?php } ?>

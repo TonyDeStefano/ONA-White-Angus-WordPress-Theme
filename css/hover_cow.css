@@ -1,0 +1,82 @@
+#ona-silhouette {
+    margin-bottom: 20px;
+}
+
+.ona-silhouette-text {
+    padding: 40px 0 40px 20px;
+}
+
+.ona-silhouette-text h2 {
+    font-size: 18px;
+}
+
+.ona-silhouette-over {
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    border: 2px solid #000;
+    border-radius: 13px;
+    background-color: transparent;
+    cursor: pointer;
+    text-align: center;
+}
+
+.ona-silhouette-over-1 {
+    left: 80px;
+    top: 60px;
+}
+
+.ona-silhouette-over-2 {
+    left: 90px;
+    top: 110px;
+}
+
+.ona-silhouette-over-3 {
+    left: 130px;
+    top: 130px;
+}
+
+.ona-silhouette-over-4 {
+    left: 120px;
+    top: 190px;
+}
+
+.ona-silhouette-over-5 {
+    left: 180px;
+    top: 180px;
+}
+
+.ona-silhouette-over-6 {
+    left: 185px;
+    top: 80px;
+}
+
+.ona-silhouette-over-7 {
+    left: 250px;
+    top: 130px;
+}
+
+.ona-silhouette-over-8 {
+    left: 280px;
+    top: 210px;
+}
+
+.ona-silhouette-over-9 {
+    left: 255px;
+    top: 270px;
+}
+
+.ona-silhouette-over-10 {
+    left: 330px;
+    top: 190px;
+}
+
+.ona-silhouette-over-11 {
+    left: 360px;
+    top: 230px;
+}
+
+.ona-silhouette-over-12 {
+    left: 370px;
+    top: 280px;
+}

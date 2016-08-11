@@ -34,10 +34,17 @@ class Controller {
 		wp_enqueue_style( 'ona-white-angus-bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', array() );
 		wp_enqueue_style( 'ona-white-angus-bootstrap-theme', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css', array() );
 		wp_enqueue_style( 'ona-white-angus-styles', get_stylesheet_uri(), array(), ( WP_DEBUG ) ? time() : self::VERSION_CSS );
+		wp_enqueue_style( 'ona-white-angus-hover-cow-styles', get_template_directory_uri() . '/css/hover_cow.css', array(), ( WP_DEBUG ) ? time() : self::VERSION_CSS );
 
 		wp_enqueue_script( 'ona-white-angus-bootstrap-js', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', array( 'jquery' ) );
 		wp_enqueue_script( 'ona-white-angus-font-awesome', 'https://use.fontawesome.com/0753562cc9.js', array() );
 		wp_enqueue_script( 'spokane-white-angus-js', get_template_directory_uri() . '/js/ona-white-angus.js', array( 'jquery' ), ( WP_DEBUG ) ? time() : self::VERSION_JS, TRUE );
+	}
+
+	public function enqueue_admin_styles_and_scripts()
+	{
+		$this->enqueue_styles_and_scripts();
+		wp_enqueue_script( 'spokane-white-angus-admin-js', get_template_directory_uri() . '/js/admin.js', array( 'jquery' ), ( WP_DEBUG ) ? time() : self::VERSION_JS, TRUE );
 	}
 
 	public function editor_styles()
@@ -241,5 +248,27 @@ class Controller {
 		$menu = wp_get_nav_menu_items( $menu );
 
 		return ( $menu === FALSE ) ? array() : $menu;
+	}
+
+	public function admin_menus()
+	{
+		add_menu_page( 'White Angus', 'White Angus', 'manage_options', 'ona_white_angus', array( $this, 'print_settings_page' ), 'dashicons-awards' );
+		add_submenu_page( 'ona_white_angus', 'Settings', 'Settings', 'manage_options', 'ona_white_angus' );
+		add_submenu_page( 'ona_white_angus', 'Hover Cow', 'Hover Cow', 'manage_options', 'ona_white_angus_hover_cow', array( $this, 'print_hover_cow_page' ) );
+	}
+
+	public function print_settings_page()
+	{
+		include( dirname( dirname( __DIR__ ) ) . '/includes/settings.php' );
+	}
+
+	public function print_hover_cow_page()
+	{
+		include( dirname( dirname( __DIR__ ) ) . '/includes/hover_cow.php' );
+	}
+
+	public function register_settings()
+	{
+		register_setting( 'ona_white_angus_settings', HoverCow::OPTION_NAME );
 	}
 }
