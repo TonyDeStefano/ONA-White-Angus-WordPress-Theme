@@ -111,15 +111,22 @@ global $ona_controller;
 </nav>
 
 <div id="cow-banner">
+
 	<div class="yellow-arrow-down">
 		<i class="fa fa-chevron-down" aria-hidden="true"></i>
 	</div>
-	<img src="<?php bloginfo('template_directory'); ?>/img/cow-banner.jpg" class="img">
+	<?php if ( is_front_page() ) { ?>
+		<img src="<?php bloginfo('template_directory'); ?>/img/cow-banner.jpg" class="img">
+	<?php } else { ?>
+		<img src="<?php bloginfo('template_directory'); ?>/img/cow-banner-internal.jpg" class="img">
+	<?php } ?>
+
 	<div id="ona-logo">
 		<a href="/">
 			<img src="<?php bloginfo('template_directory'); ?>/img/ona-white-angus-top-logo.png">
 		</a>
 	</div>
+
 </div>
 
 <div id="ona-logo-mobile">
