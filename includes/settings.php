@@ -21,6 +21,7 @@ global $ona_controller;
 		?>
 
 		<input type="hidden" name="<?php echo \OnaWhiteAngus\HoverCow::OPTION_NAME; ?>" value="<?php echo esc_html( \OnaWhiteAngus\HoverCow::getOptionValue() ); ?>">
+		<input type="hidden" name="<?php echo \OnaWhiteAngus\HomepageBox::OPTION_NAME; ?>" value="<?php echo esc_html( \OnaWhiteAngus\HomepageBox::getOptionValue() ); ?>">
 
 		<table class="form-table table table-bordered">
 			<thead>

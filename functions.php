@@ -2,6 +2,7 @@
 
 require_once ( 'classes/OnaWhiteAngus/Controller.php' );
 require_once ( 'classes/OnaWhiteAngus/HoverCow.php' );
+require_once ( 'classes/OnaWhiteAngus/HomepageBox.php' );
 
 $ona_controller = new \OnaWhiteAngus\Controller;
 

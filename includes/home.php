@@ -1,38 +1,62 @@
 <div class="row ona-home-columns">
 	<div class="col-sm-4">
 
-		<p align="center">
-			<i class="fa fa-sun-o" aria-hidden="true"></i>
-		</p>
-		<h2>A Cattle breed that can<br>handle warm climates</h2>
-		<p>Content</p>
-		<p align="center">
-			<a class="btn btn-default btn-ona-yellow">About OWA</a>
-		</p>
+		<?php $homepage_box = new \OnaWhiteAngus\HomepageBox( 1 ); ?>
+
+		<?php if ( strlen( $homepage_box->getTitle() ) > 0 ) { ?>
+
+			<p align="center">
+				<i class="fa fa-sun-o" aria-hidden="true"></i>
+			</p>
+			<h2><?php echo $homepage_box->getTitle(); ?></h2>
+			<p><?php echo $homepage_box->getContent(); ?></p>
+			<p align="center">
+				<a href="<?php echo $homepage_box->getLink(); ?>" class="btn btn-default btn-ona-yellow">
+					<?php echo $homepage_box->getLinkText(); ?>
+				</a>
+			</p>
+
+		<?php } ?>
 
 	</div>
 	<div class="col-sm-4">
 
-		<p align="center">
-			<i class="fa fa-pagelines" aria-hidden="true"></i>
-		</p>
-		<h2>ONA White Angus Straws at<br>our marketplace</h2>
-		<p>Content</p>
-		<p align="center">
-			<a class="btn btn-default btn-ona-yellow">Marketplace</a>
-		</p>
+		<?php $homepage_box = new \OnaWhiteAngus\HomepageBox( 2 ); ?>
+
+		<?php if ( strlen( $homepage_box->getTitle() ) > 0 ) { ?>
+
+			<p align="center">
+				<i class="fa fa-pagelines" aria-hidden="true"></i>
+			</p>
+			<h2><?php echo $homepage_box->getTitle(); ?></h2>
+			<p><?php echo $homepage_box->getContent(); ?></p>
+			<p align="center">
+				<a href="<?php echo $homepage_box->getLink(); ?>" class="btn btn-default btn-ona-yellow">
+					<?php echo $homepage_box->getLinkText(); ?>
+				</a>
+			</p>
+
+		<?php } ?>
 
 	</div>
 	<div class="col-sm-4">
 
-		<p align="center">
-			<i class="fa fa-book" aria-hidden="true"></i>
-		</p>
-		<h2>Register your cattle on our website today</h2>
-		<p>Content</p>
-		<p align="center">
-			<a class="btn btn-default btn-ona-yellow">Register</a>
-		</p>
+		<?php $homepage_box = new \OnaWhiteAngus\HomepageBox( 3 ); ?>
+
+		<?php if ( strlen( $homepage_box->getTitle() ) > 0 ) { ?>
+
+			<p align="center">
+				<i class="fa fa-book" aria-hidden="true"></i>
+			</p>
+			<h2><?php echo $homepage_box->getTitle(); ?></h2>
+			<p><?php echo $homepage_box->getContent(); ?></p>
+			<p align="center">
+				<a href="<?php echo $homepage_box->getLink(); ?>" class="btn btn-default btn-ona-yellow">
+					<?php echo $homepage_box->getLinkText(); ?>
+				</a>
+			</p>
+
+		<?php } ?>
 
 	</div>
 </div>

@@ -285,6 +285,7 @@ class Controller {
 	public function register_settings()
 	{
 		register_setting( 'ona_white_angus_settings', HoverCow::OPTION_NAME );
+		register_setting( 'ona_white_angus_settings', HomepageBox::OPTION_NAME );
 		register_setting( 'ona_white_angus_settings', self::OPTION_ADDRESS );
 		register_setting( 'ona_white_angus_settings', self::OPTION_PHONE );
 		register_setting( 'ona_white_angus_settings', self::OPTION_FACEBOOK );
