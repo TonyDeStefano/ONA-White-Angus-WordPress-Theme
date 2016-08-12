@@ -15,6 +15,15 @@ class Controller {
 	const MENU_MAIN = 'ona_main_menu';
 	const MENU_SECONDARY = 'ona_secondary_menu';
 
+	const OPTION_ADDRESS = 'ona_white_angus_address';
+	const OPTION_PHONE = 'ona_white_angus_phone';
+	const OPTION_FACEBOOK = 'ona_white_angus_facebook';
+	const OPTION_TWITTER = 'ona_white_angus_twitter';
+	const OPTION_INSTAGRAM = 'ona_white_angus_instagram';
+	const OPTION_YOUTUBE = 'ona_white_angus_youtube';
+	const OPTION_CALL_TO_ACTION = 'ona_white_angus_call_to_action';
+	const OPTION_REGISTER_LINK = 'ona_white_angus_register_link';
+
 	public function theme_setup()
 	{
 		add_theme_support( 'automatic-feed-links' );
@@ -253,13 +262,19 @@ class Controller {
 	public function admin_menus()
 	{
 		add_menu_page( 'White Angus', 'White Angus', 'manage_options', 'ona_white_angus', array( $this, 'print_settings_page' ), 'dashicons-awards' );
-		add_submenu_page( 'ona_white_angus', 'Settings', 'Settings', 'manage_options', 'ona_white_angus' );
+		add_submenu_page( 'ona_white_angus', 'General Settings', 'General Settings', 'manage_options', 'ona_white_angus' );
+		add_submenu_page( 'ona_white_angus', 'Homepage Boxes', 'Homepage Boxes', 'manage_options', 'ona_white_angus_homepage_boxes', array( $this, 'print_homepage_boxes_page' ) );
 		add_submenu_page( 'ona_white_angus', 'Hover Cow', 'Hover Cow', 'manage_options', 'ona_white_angus_hover_cow', array( $this, 'print_hover_cow_page' ) );
 	}
 
 	public function print_settings_page()
 	{
 		include( dirname( dirname( __DIR__ ) ) . '/includes/settings.php' );
+	}
+
+	public function print_homepage_boxes_page()
+	{
+		include( dirname( dirname( __DIR__ ) ) . '/includes/homepage_boxes.php' );
 	}
 
 	public function print_hover_cow_page()
@@ -270,5 +285,78 @@ class Controller {
 	public function register_settings()
 	{
 		register_setting( 'ona_white_angus_settings', HoverCow::OPTION_NAME );
+		register_setting( 'ona_white_angus_settings', self::OPTION_ADDRESS );
+		register_setting( 'ona_white_angus_settings', self::OPTION_PHONE );
+		register_setting( 'ona_white_angus_settings', self::OPTION_FACEBOOK );
+		register_setting( 'ona_white_angus_settings', self::OPTION_TWITTER );
+		register_setting( 'ona_white_angus_settings', self::OPTION_INSTAGRAM );
+		register_setting( 'ona_white_angus_settings', self::OPTION_YOUTUBE );
+		register_setting( 'ona_white_angus_settings', self::OPTION_CALL_TO_ACTION );
+		register_setting( 'ona_white_angus_settings', self::OPTION_REGISTER_LINK );
+	}
+
+	public function getAddress( $nl2br = TRUE )
+	{
+		if ( $nl2br )
+		{
+			return nl2br( get_option( self::OPTION_ADDRESS, '' ) );
+		}
+
+		return get_option( self::OPTION_ADDRESS, '' );
+	}
+
+	public function getPhoneNumber( $numbers_only = FALSE )
+	{
+		if ( $numbers_only )
+		{
+			return preg_replace( '/[^0-9]/', '', get_option( self::OPTION_PHONE, '' ) );
+		}
+
+		return get_option( self::OPTION_PHONE, '' );
+	}
+
+	public function getFacebookLink()
+	{
+		return self::addHttp( get_option( self::OPTION_FACEBOOK, '' ) );
+	}
+
+	public function getTwitterLink()
+	{
+		return self::addHttp( get_option( self::OPTION_TWITTER, '' ) );
+	}
+
+	public function getInstagramLink()
+	{
+		return self::addHttp( get_option( self::OPTION_INSTAGRAM, '' ) );
+	}
+
+	public function getYouTubeLink()
+	{
+		return self::addHttp( get_option( self::OPTION_YOUTUBE, '' ) );
+	}
+
+	public static function addHttp( $link )
+	{
+		if ( strlen( $link ) > 0 && strtolower( substr( $link, 0 , 4 ) ) != 'http' )
+		{
+			$link = 'http://' . $link;
+		}
+
+		return $link;
+	}
+
+	public function hasSocialLinks()
+	{
+		return ( strlen( $this->getFacebookLink() . $this->getTwitterLink() . $this->getInstagramLink() . $this->getYouTubeLink() ) > 0 );
+	}
+
+	public function getCallToAction()
+	{
+		return get_option( self::OPTION_CALL_TO_ACTION, '' );
+	}
+
+	public function getRegisterLink()
+	{
+		return get_option( self::OPTION_REGISTER_LINK, '' );
 	}
 }

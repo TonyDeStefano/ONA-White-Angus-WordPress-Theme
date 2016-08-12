@@ -9,10 +9,12 @@ global $ona_controller;
 
 <div id="call-to-action" class="row">
 	<div class="col-sm-8 col-left">
-		Call to Action
+		<?php echo $ona_controller->getCallToAction(); ?>
 	</div>
 	<div class="col-sm-4 col-right">
-		<a href="">Register Now</a>
+		<?php if ( strlen( $ona_controller->getRegisterLink() ) > 0 ) { ?>
+			<a href="<?php echo $ona_controller->getRegisterLink(); ?>">Register Now</a>
+		<?php } ?>
 	</div>
 </div>
 
@@ -23,19 +25,38 @@ global $ona_controller;
 	<div class="col-sm-4">
 		<h3>Contact Us</h3>
 		<p>
-			(509) 123-4567<br>
-			12345 Main Street<br>
-			Spokane, WA 99999
+			<?php if ( strlen( $ona_controller->getPhoneNumber() ) > 0 ) { ?>
+				<?php echo $ona_controller->getPhoneNumber(); ?><br>
+			<?php } ?>
+			<?php echo $ona_controller->getAddress(); ?>
 		</p>
 	</div>
 	<div class="col-sm-4">
-		<h3>Follow Us</h3>
-		<p>
-			<i class="fa fa-facebook fa-fw" aria-hidden="true"></i>
-			<i class="fa fa-twitter fa-fw" aria-hidden="true"></i>
-			<i class="fa fa-instagram fa-fw" aria-hidden="true"></i>
-			<i class="fa fa-youtube fa-fw" aria-hidden="true"></i>
-		</p>
+		<?php if ( $ona_controller->hasSocialLinks() ) { ?>
+			<h3>Follow Us</h3>
+			<p>
+				<?php if ( strlen( $ona_controller->getFacebookLink() ) > 0 ) { ?>
+					<a href="<?php echo $ona_controller->getFacebookLink(); ?>" target="_blank">
+						<i class="fa fa-facebook fa-fw" aria-hidden="true"></i>
+					</a>
+				<?php } ?>
+				<?php if ( strlen( $ona_controller->getTwitterLink() ) > 0 ) { ?>
+					<a href="<?php echo $ona_controller->getTwitterLink(); ?>" target="_blank">
+						<i class="fa fa-twitter fa-fw" aria-hidden="true"></i>
+					</a>
+				<?php } ?>
+				<?php if ( strlen( $ona_controller->getInstagramLink() ) > 0 ) { ?>
+					<a href="<?php echo $ona_controller->getInstagramLink(); ?>" target="_blank">
+						<i class="fa fa-instagram fa-fw" aria-hidden="true"></i>
+					</a>
+				<?php } ?>
+				<?php if ( strlen( $ona_controller->getYouTubeLink() ) > 0 ) { ?>
+					<a href="<?php echo $ona_controller->getYouTubeLink(); ?>" target="_blank">
+						<i class="fa fa-youtube fa-fw" aria-hidden="true"></i>
+					</a>
+				<?php } ?>
+			</p>
+		<?php } ?>
 	</div>
 </div>
 

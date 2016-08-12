@@ -43,6 +43,13 @@ global $ona_controller;
 						</a>
 					</li>
 				<?php } ?>
+				<?php if ( strlen( $ona_controller->getPhoneNumber() ) > 0 ) { ?>
+					<li>
+						<a href="tel:<?php echo $ona_controller->getPhoneNumber( TRUE ); ?>">
+							<?php echo $ona_controller->getPhoneNumber(); ?>
+						</a>
+					</li>
+				<?php } ?>
 			</ul>
 		</div>
 	</div>
@@ -64,6 +71,13 @@ global $ona_controller;
 					<li>
 						<a href="<?php echo $menu_item->url; ?>">
 							<?php echo $menu_item->title; ?>
+						</a>
+					</li>
+				<?php } ?>
+				<?php if ( strlen( $ona_controller->getPhoneNumber() ) > 0 ) { ?>
+					<li>
+						<a href="tel:<?php echo $ona_controller->getPhoneNumber( TRUE ); ?>">
+							<?php echo $ona_controller->getPhoneNumber(); ?>
 						</a>
 					</li>
 				<?php } ?>

@@ -90,6 +90,11 @@ class HoverCow {
 		return ( strlen( $this->getTitle() ) > 0 || strlen( $this->getContent() ) > 0 );
 	}
 
+	public static function getOptionValue()
+	{
+		return get_option( self::OPTION_NAME , '' );
+	}
+
 	/**
 	 * @return HoverCow[]
 	 */
@@ -97,7 +102,7 @@ class HoverCow {
 	{
 		$hover_cows = array();
 
-		$data = get_option( self::OPTION_NAME , '' );
+		$data = self::getOptionValue();
 		if ( strlen( $data ) > 0 )
 		{
 			$datum = json_decode( $data, TRUE );

@@ -1,3 +1,10 @@
+<?php
+
+/** @var \OnaWhiteAngus\Controller $ona_controller */
+global $ona_controller;
+
+?>
+
 <div class="wrap">
 
 	<h1>
@@ -25,6 +32,14 @@
 
 				?>
 
+				<input type="hidden" name="<?php echo \OnaWhiteAngus\Controller::OPTION_PHONE; ?>" value="<?php echo esc_html( $ona_controller->getPhoneNumber() ); ?>">
+				<input type="hidden" name="<?php echo \OnaWhiteAngus\Controller::OPTION_ADDRESS; ?>" value="<?php echo esc_html( $ona_controller->getAddress( FALSE ) ); ?>">
+				<input type="hidden" name="<?php echo \OnaWhiteAngus\Controller::OPTION_FACEBOOK; ?>" value="<?php echo esc_html( $ona_controller->getFacebookLink() ); ?>">
+				<input type="hidden" name="<?php echo \OnaWhiteAngus\Controller::OPTION_TWITTER; ?>" value="<?php echo esc_html( $ona_controller->getTwitterLink() ); ?>">
+				<input type="hidden" name="<?php echo \OnaWhiteAngus\Controller::OPTION_INSTAGRAM; ?>" value="<?php echo esc_html( $ona_controller->getInstagramLink() ); ?>">
+				<input type="hidden" name="<?php echo \OnaWhiteAngus\Controller::OPTION_YOUTUBE; ?>" value="<?php echo esc_html( $ona_controller->getYouTubeLink() ); ?>">
+				<input type="hidden" name="<?php echo \OnaWhiteAngus\Controller::OPTION_CALL_TO_ACTION; ?>" value="<?php echo esc_html( $ona_controller->getCallToAction() ); ?>">
+				<input type="hidden" name="<?php echo \OnaWhiteAngus\Controller::OPTION_REGISTER_LINK; ?>" value="<?php echo esc_html( $ona_controller->getRegisterLink() ); ?>">
 				<input type="hidden" id="ona-hover-cow" name="<?php echo \OnaWhiteAngus\HoverCow::OPTION_NAME; ?>">
 
 			</form>
