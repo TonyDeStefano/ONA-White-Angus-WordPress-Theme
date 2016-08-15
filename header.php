@@ -8,11 +8,14 @@ global $ona_controller;
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
-<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=edge" /><![endif]-->
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<?php wp_head(); ?>
+	<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=edge" /><![endif]-->
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<?php wp_head(); ?>
+
+	<link rel="icon" type="image/x-icon" href="<?php bloginfo('template_directory'); ?>/img/favicon.ico" />
 
 </head>
 <body <?php body_class(); ?>>
