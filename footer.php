@@ -20,7 +20,7 @@ global $ona_controller;
 
 <div id="ona-footer" class="row">
 	<div class="col-sm-4 hidden-xs">
-		<img src="<?php bloginfo('template_directory'); ?>/img/ona-white-angus-logo.png">
+		<img src="<?php bloginfo('template_directory'); ?>/img/white-angus-logo.png">
 	</div>
 	<div class="col-sm-4">
 		<h3>Contact Us</h3>
@@ -85,7 +85,7 @@ global $ona_controller;
 </nav>
 
 <div id="ona-copyright">
-	&copy; 2016 ONA WHITE ANGUS REGISTRY
+	&copy; 2016 WHITE ANGUS ASSOCIATION
 </div>
 
 <div id="ona-cows"></div>

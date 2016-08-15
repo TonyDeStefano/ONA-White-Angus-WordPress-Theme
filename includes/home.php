@@ -66,7 +66,7 @@
 	<div class="row ona-home-cow hidden-xs">
 		<div class="col-md-12">
 			<h2>
-				Why the ONA White Angus has the advantage in warm climates<br>
+				Why the White Angus has the advantage in warm climates<br>
 				<small>
 					Hover over each circle below to find out
 				</small>

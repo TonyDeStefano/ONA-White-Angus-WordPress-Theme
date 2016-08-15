@@ -182,7 +182,7 @@ global $ona_controller;
 
 	<div id="ona-logo">
 		<a href="/">
-			<img src="<?php bloginfo('template_directory'); ?>/img/ona-white-angus-top-logo.png">
+			<img src="<?php bloginfo('template_directory'); ?>/img/white-angus-top-logo.png">
 		</a>
 	</div>
 
@@ -190,7 +190,7 @@ global $ona_controller;
 
 <div id="ona-logo-mobile">
 	<a href="/">
-		<img src="<?php bloginfo('template_directory'); ?>/img/ona-white-angus-top-logo.png">
+		<img src="<?php bloginfo('template_directory'); ?>/img/white-angus-top-logo.png">
 	</a>
 </div>
 
