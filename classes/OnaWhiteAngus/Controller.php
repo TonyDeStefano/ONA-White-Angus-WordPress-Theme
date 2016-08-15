@@ -24,6 +24,8 @@ class Controller {
 	const OPTION_CALL_TO_ACTION = 'ona_white_angus_call_to_action';
 	const OPTION_REGISTER_LINK = 'ona_white_angus_register_link';
 
+	private $attributes;
+
 	public function theme_setup()
 	{
 		add_theme_support( 'automatic-feed-links' );
@@ -384,5 +386,28 @@ class Controller {
 	public function getRegisterLink()
 	{
 		return get_option( self::OPTION_REGISTER_LINK, '' );
+	}
+
+	public function short_code( $attributes )
+	{
+		$this->attributes = shortcode_atts( array(
+			'page' => ''
+		), $attributes );
+
+		ob_start();
+		include( dirname( dirname( __DIR__ ) ) . '/includes/shortcode.php');
+		$output = ob_get_contents();
+		ob_end_clean();
+		return $output;
+	}
+
+	public function getAttribute( $key )
+	{
+		if ( array_key_exists( $key, $this->attributes ) )
+		{
+			return $this->attributes[ $key ];
+		}
+
+		return '';
 	}
 }

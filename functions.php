@@ -13,6 +13,7 @@ add_action( 'admin_init', array( $ona_controller, 'editor_styles' ) );
 add_action( 'widgets_init', array( $ona_controller, 'widgets_init' ) );
 add_action( 'customize_register', array( $ona_controller, 'customizer' ) );
 add_action( 'pre_post_update', array( $ona_controller, 'save_custom_page_meta' ) );
+add_shortcode ( 'ona_white_angus', array( $ona_controller, 'short_code' ) );
 
 if ( is_admin() )
 {
