@@ -73,24 +73,10 @@ global $ona_controller;
 		<div id="navbar-4" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
 				<?php foreach ( $ona_controller->get_menu_items( \OnaWhiteAngus\Controller::MENU_SECONDARY ) AS $menu_item ) { ?>
-					<li<?php if ( $menu_item->hasChildren() ) { ?> class="dropdown" <?php } ?>>
-						<a href="<?php echo $menu_item->getUrl(); ?>"<?php if ( $menu_item->hasChildren() ) { ?> class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"<?php } ?>>
+					<li>
+						<a href="<?php echo $menu_item->getUrl(); ?>">
 							<?php echo $menu_item->getTitle(); ?>
-							<?php if ( $menu_item->hasChildren() ) { ?>
-								<span class="caret"></span>
-							<?php } ?>
 						</a>
-						<?php if ( $menu_item->hasChildren() ) { ?>
-							<ul class="dropdown-menu">
-								<?php foreach ( $menu_item->getChildren() as $child ) { ?>
-									<li>
-										<a href="<?php echo $child->getUrl(); ?>">
-											<?php echo $child->getTitle(); ?>
-										</a>
-									</li>
-								<?php } ?>
-							</ul>
-						<?php } ?>
 					</li>
 				<?php } ?>
 			</ul>
