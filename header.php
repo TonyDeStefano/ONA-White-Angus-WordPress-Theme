@@ -30,17 +30,45 @@ global $ona_controller;
 		<div id="navbar-3" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav navbar-right">
 				<?php foreach ( $ona_controller->get_menu_items( \OnaWhiteAngus\Controller::MENU_MAIN ) AS $menu_item ) { ?>
-					<li>
-						<a href="<?php echo $menu_item->url; ?>">
-							<?php echo $menu_item->title; ?>
+					<li<?php if ( $menu_item->hasChildren() ) { ?> class="dropdown" <?php } ?>>
+						<a href="<?php echo $menu_item->getUrl(); ?>"<?php if ( $menu_item->hasChildren() ) { ?> class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"<?php } ?>>
+							<?php echo $menu_item->getTitle(); ?>
+							<?php if ( $menu_item->hasChildren() ) { ?>
+								<span class="caret"></span>
+							<?php } ?>
 						</a>
+						<?php if ( $menu_item->hasChildren() ) { ?>
+							<ul class="dropdown-menu">
+								<?php foreach ( $menu_item->getChildren() as $child ) { ?>
+									<li>
+										<a href="<?php echo $child->getUrl(); ?>">
+											<?php echo $child->getTitle(); ?>
+										</a>
+									</li>
+								<?php } ?>
+							</ul>
+						<?php } ?>
 					</li>
 				<?php } ?>
 				<?php foreach ( $ona_controller->get_menu_items( \OnaWhiteAngus\Controller::MENU_SECONDARY ) AS $menu_item ) { ?>
-					<li>
-						<a href="<?php echo $menu_item->url; ?>">
-							<?php echo $menu_item->title; ?>
+					<li<?php if ( $menu_item->hasChildren() ) { ?> class="dropdown" <?php } ?>>
+						<a href="<?php echo $menu_item->getUrl(); ?>"<?php if ( $menu_item->hasChildren() ) { ?> class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"<?php } ?>>
+							<?php echo $menu_item->getTitle(); ?>
+								<?php if ( $menu_item->hasChildren() ) { ?>
+								<span class="caret"></span>
+							<?php } ?>
 						</a>
+						<?php if ( $menu_item->hasChildren() ) { ?>
+							<ul class="dropdown-menu">
+								<?php foreach ( $menu_item->getChildren() as $child ) { ?>
+									<li>
+										<a href="<?php echo $child->getUrl(); ?>">
+											<?php echo $child->getTitle(); ?>
+										</a>
+									</li>
+								<?php } ?>
+							</ul>
+						<?php } ?>
 					</li>
 				<?php } ?>
 				<?php if ( strlen( $ona_controller->getPhoneNumber() ) > 0 ) { ?>
@@ -68,10 +96,24 @@ global $ona_controller;
 		<div id="navbar-1" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav navbar-right">
 				<?php foreach ( $ona_controller->get_menu_items( \OnaWhiteAngus\Controller::MENU_MAIN ) AS $menu_item ) { ?>
-					<li>
-						<a href="<?php echo $menu_item->url; ?>">
-							<?php echo $menu_item->title; ?>
+					<li<?php if ( $menu_item->hasChildren() ) { ?> class="dropdown" <?php } ?>>
+						<a href="<?php echo $menu_item->getUrl(); ?>"<?php if ( $menu_item->hasChildren() ) { ?> class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"<?php } ?>>
+							<?php echo $menu_item->getTitle(); ?>
+								<?php if ( $menu_item->hasChildren() ) { ?>
+								<span class="caret"></span>
+							<?php } ?>
 						</a>
+						<?php if ( $menu_item->hasChildren() ) { ?>
+							<ul class="dropdown-menu">
+								<?php foreach ( $menu_item->getChildren() as $child ) { ?>
+									<li>
+										<a href="<?php echo $child->getUrl(); ?>">
+											<?php echo $child->getTitle(); ?>
+										</a>
+									</li>
+								<?php } ?>
+							</ul>
+						<?php } ?>
 					</li>
 				<?php } ?>
 				<?php if ( strlen( $ona_controller->getPhoneNumber() ) > 0 ) { ?>
@@ -99,10 +141,24 @@ global $ona_controller;
 		<div id="navbar-2" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav navbar-right">
 				<?php foreach ( $ona_controller->get_menu_items( \OnaWhiteAngus\Controller::MENU_SECONDARY ) AS $menu_item ) { ?>
-					<li>
-						<a href="<?php echo $menu_item->url; ?>">
-							<?php echo $menu_item->title; ?>
+					<li<?php if ( $menu_item->hasChildren() ) { ?> class="dropdown" <?php } ?>>
+						<a href="<?php echo $menu_item->getUrl(); ?>"<?php if ( $menu_item->hasChildren() ) { ?> class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"<?php } ?>>
+							<?php echo $menu_item->getTitle(); ?>
+								<?php if ( $menu_item->hasChildren() ) { ?>
+								<span class="caret"></span>
+							<?php } ?>
 						</a>
+						<?php if ( $menu_item->hasChildren() ) { ?>
+							<ul class="dropdown-menu">
+								<?php foreach ( $menu_item->getChildren() as $child ) { ?>
+									<li>
+										<a href="<?php echo $child->getUrl(); ?>">
+											<?php echo $child->getTitle(); ?>
+										</a>
+									</li>
+								<?php } ?>
+							</ul>
+						<?php } ?>
 					</li>
 				<?php } ?>
 			</ul>

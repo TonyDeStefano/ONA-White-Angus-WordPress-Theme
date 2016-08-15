@@ -248,15 +248,40 @@ class Controller {
 	/**
 	 * @param $menu
 	 *
-	 * @return \WP_Post[]
+	 * @return MenuItem[]
 	 */
 	public function get_menu_items( $menu )
 	{
+		/** @var MenuItem[] $menu_items */
+		$menu_items = array();
+
 		$menu_locations = get_nav_menu_locations();
 		$menu = $menu_locations[ $menu ];
-		$menu = wp_get_nav_menu_items( $menu );
+		$menus = wp_get_nav_menu_items( $menu );
 
-		return ( $menu === FALSE ) ? array() : $menu;
+		if ( $menus !== FALSE )
+		{
+			/** @var \WP_Post $menu*/
+
+			foreach ( $menus as $menu )
+			{
+				$menu_item = new MenuItem;
+				$menu_item
+					->setTitle( $menu->title )
+					->setUrl( $menu->url );
+
+				if ( $menu->menu_item_parent == 0 )
+				{
+					$menu_items[ $menu->ID ] = $menu_item;
+				}
+				elseif ( array_key_exists( $menu->menu_item_parent, $menu_items ) )
+				{
+					$menu_items[ $menu->menu_item_parent ]->addChild( $menu_item );
+				}
+			}
+		}
+
+		return $menu_items;
 	}
 
 	public function admin_menus()

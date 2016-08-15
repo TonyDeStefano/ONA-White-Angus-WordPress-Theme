@@ -1,6 +1,7 @@
 <?php
 
 require_once ( 'classes/OnaWhiteAngus/Controller.php' );
+require_once ( 'classes/OnaWhiteAngus/MenuItem.php' );
 require_once ( 'classes/OnaWhiteAngus/HoverCow.php' );
 require_once ( 'classes/OnaWhiteAngus/HomepageBox.php' );
 
