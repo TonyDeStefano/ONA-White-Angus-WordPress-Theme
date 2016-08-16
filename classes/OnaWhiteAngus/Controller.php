@@ -23,6 +23,8 @@ class Controller {
 	const OPTION_YOUTUBE = 'ona_white_angus_youtube';
 	const OPTION_CALL_TO_ACTION = 'ona_white_angus_call_to_action';
 	const OPTION_REGISTER_LINK = 'ona_white_angus_register_link';
+	const OPTION_LIFETIME_FEE = 'ona_white_angus_lifetime_fee';
+	const OPTION_ANNUAL_FEE = 'ona_white_angus_annual_fee';
 
 	private $attributes;
 
@@ -321,6 +323,8 @@ class Controller {
 		register_setting( 'ona_white_angus_settings', self::OPTION_YOUTUBE );
 		register_setting( 'ona_white_angus_settings', self::OPTION_CALL_TO_ACTION );
 		register_setting( 'ona_white_angus_settings', self::OPTION_REGISTER_LINK );
+		register_setting( 'ona_white_angus_settings', self::OPTION_LIFETIME_FEE );
+		register_setting( 'ona_white_angus_settings', self::OPTION_ANNUAL_FEE );
 	}
 
 	public function getAddress( $nl2br = TRUE )
@@ -386,6 +390,28 @@ class Controller {
 	public function getRegisterLink()
 	{
 		return get_option( self::OPTION_REGISTER_LINK, '' );
+	}
+
+	public function getLifetimeFee()
+	{
+		$fee = get_option( self::OPTION_LIFETIME_FEE, '' );
+		if ( strlen( $fee ) > 0 )
+		{
+			$fee = preg_replace('/[^0-9.]*/', '', $fee);
+		}
+
+		return $fee;
+	}
+
+	public function getAnnualFee()
+	{
+		$fee =  get_option( self::OPTION_ANNUAL_FEE, '' );
+		if ( strlen( $fee ) > 0 )
+		{
+			$fee = preg_replace('/[^0-9.]*/', '', $fee);
+		}
+
+		return $fee;
 	}
 
 	public function short_code( $attributes )

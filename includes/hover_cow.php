@@ -40,6 +40,8 @@ global $ona_controller;
 				<input type="hidden" name="<?php echo \OnaWhiteAngus\Controller::OPTION_YOUTUBE; ?>" value="<?php echo esc_html( $ona_controller->getYouTubeLink() ); ?>">
 				<input type="hidden" name="<?php echo \OnaWhiteAngus\Controller::OPTION_CALL_TO_ACTION; ?>" value="<?php echo esc_html( $ona_controller->getCallToAction() ); ?>">
 				<input type="hidden" name="<?php echo \OnaWhiteAngus\Controller::OPTION_REGISTER_LINK; ?>" value="<?php echo esc_html( $ona_controller->getRegisterLink() ); ?>">
+				<input type="hidden" name="<?php echo \OnaWhiteAngus\Controller::OPTION_LIFETIME_FEE; ?>" value="<?php echo esc_html( $ona_controller->getLifetimeFee() ); ?>">
+				<input type="hidden" name="<?php echo \OnaWhiteAngus\Controller::OPTION_ANNUAL_FEE; ?>" value="<?php echo esc_html( $ona_controller->getAnnualFee() ); ?>">
 				<input type="hidden" name="<?php echo \OnaWhiteAngus\HomepageBox::OPTION_NAME; ?>" value="<?php echo esc_html( \OnaWhiteAngus\HomepageBox::getOptionValue() ); ?>">
 				<input type="hidden" id="ona-hover-cow" name="<?php echo \OnaWhiteAngus\HoverCow::OPTION_NAME; ?>">
 

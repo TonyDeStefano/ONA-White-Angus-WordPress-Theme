@@ -173,6 +173,50 @@ global $ona_controller;
 						value="<?php echo esc_html( $ona_controller->getRegisterLink() ); ?>">
 				</td>
 			</tr>
+			<tr valign="top">
+				<th scope="row">
+					<label for="<?php echo \OnaWhiteAngus\Controller::OPTION_ANNUAL_FEE; ?>">
+						Annual Membership Fee
+					</label>
+				</th>
+				<td>
+					<?php if ( strlen( $ona_controller->getAnnualFee() ) > 0 ) { ?>
+						$<?php echo number_format( $ona_controller->getAnnualFee(), 2 ); ?>
+					<?php } else { ?>
+						N/A
+					<?php } ?>
+				</td>
+				<td>
+					<input
+						type="text"
+						class="form-control"
+						id="<?php echo \OnaWhiteAngus\Controller::OPTION_ANNUAL_FEE; ?>"
+						name="<?php echo \OnaWhiteAngus\Controller::OPTION_ANNUAL_FEE; ?>"
+						value="<?php echo esc_html( $ona_controller->getAnnualFee() ); ?>">
+				</td>
+			</tr>
+			<tr valign="top">
+				<th scope="row">
+					<label for="<?php echo \OnaWhiteAngus\Controller::OPTION_LIFETIME_FEE; ?>">
+						Lifetime Membership Fee
+					</label>
+				</th>
+				<td>
+					<?php if ( strlen( $ona_controller->getLifetimeFee() ) > 0 ) { ?>
+						$<?php echo number_format( $ona_controller->getLifetimeFee(), 2 ); ?>
+					<?php } else { ?>
+						N/A
+					<?php } ?>
+				</td>
+				<td>
+					<input
+						type="text"
+						class="form-control"
+						id="<?php echo \OnaWhiteAngus\Controller::OPTION_LIFETIME_FEE; ?>"
+						name="<?php echo \OnaWhiteAngus\Controller::OPTION_LIFETIME_FEE; ?>"
+						value="<?php echo esc_html( $ona_controller->getLifetimeFee() ); ?>">
+				</td>
+			</tr>
 		</table>
 
 		<?php submit_button(); ?>
