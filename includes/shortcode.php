@@ -1,14 +1,14 @@
 <?php
 
 /** @var \OnaWhiteAngus\Controller $this */
-e
+
 ?>
 
 <?php if ( $this->getAttribute( 'page' ) == 'directory' ) { ?>
 
 	<p>Directory coming soon ...</p>
 
-<?php } elseif ( ! is_user_logged_in() ) { ?>
+<?php } elseif ( ! $this->member->isMember() ) { ?>
 
 	<p>Log In or Register</p>
 

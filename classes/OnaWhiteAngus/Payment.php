@@ -4,6 +4,8 @@ namespace OnaWhiteAngus;
 
 class Payment {
 
+	const TABLE_NAME = 'ona_white_angus_payments';
+
 	const METHOD_CASH = 'cash';
 	const METHOD_CREDIT_CARD = 'credit card';
 	const METHOD_CHECK = 'check';

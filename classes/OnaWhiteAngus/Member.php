@@ -4,9 +4,10 @@ namespace OnaWhiteAngus;
 
 class Member {
 
+	const TABLE_NAME = 'ona_white_angus_members';
+
 	private $id;
 	private $wp_user_id;
-	private $username;
 	private $first_name;
 	private $last_name;
 	private $farm_name;
@@ -14,7 +15,6 @@ class Member {
 	private $city;
 	private $state;
 	private $zip;
-	private $email;
 	private $phone;
 	private $website;
 	private $is_active = FALSE;
@@ -26,6 +26,96 @@ class Member {
 
 	/** @var \WP_User $user */
 	private $user;
+
+	public function __construct( $id = NULL )
+	{
+		$this
+			->setId( $id )
+			->read();
+	}
+
+	public function create()
+	{
+
+	}
+
+	public function read()
+	{
+		/** @var \wpdb $wpdb */
+		global $wpdb;
+
+		if ( $this->id !== NULL )
+		{
+			$sql = $wpdb->prepare("
+				SELECT
+					*
+				FROM
+					" . $wpdb->prefix . self::TABLE_NAME . "
+				WHERE
+					id = %d",
+					$this->id
+			);
+
+			if ( $row = $wpdb->get_row( $sql ) )
+			{
+				$this->loadFromRow( $row );
+			}
+			else
+			{
+				$this->setWpUserId( NULL );
+			}
+		}
+	}
+
+	public function readFromWordPressId( $wp_user_id )
+	{
+		/** @var \wpdb $wpdb */
+		global $wpdb;
+
+		$this->setWpUserId( $wp_user_id );
+
+		$sql = $wpdb->prepare("
+			SELECT
+				*
+			FROM
+				" . $wpdb->prefix . self::TABLE_NAME . "
+			WHERE
+				wp_user_id = %d",
+			$this->wp_user_id
+		);
+
+		if ( $row = $wpdb->get_row( $sql ) )
+		{
+			$this->loadFromRow( $row );
+		}
+		else
+		{
+			$this->setWpUserId( NULL );
+		}
+	}
+
+	public function loadFromRow( $row )
+	{
+		$this
+			->setId( $row->id )
+			->setWpUserId( $row->wp_user_id )
+			->setFirstName( $row->first_name )
+			->setLastName( $row->last_name )
+			->setFarmName( $row->farm_name )
+			->setAddress( $row->address )
+			->setCity( $row->city )
+			->setState( $row->state )
+			->setZip( $row->zip )
+			->setPhone( $row->phone )
+			->setIsActive( $row->is_active )
+			->setCreatedAt( $row->created_at )
+			->setUpdatedAt( $row->updated_at );
+	}
+
+	public function update()
+	{
+
+	}
 
 	/**
 	 * @return mixed
@@ -63,26 +153,6 @@ class Member {
 	public function setWpUserId( $wp_user_id )
 	{
 		$this->wp_user_id = ( is_numeric( $wp_user_id ) ) ? intval( $wp_user_id ) : NULL;
-
-		return $this;
-	}
-
-	/**
-	 * @return mixed
-	 */
-	public function getUsername()
-	{
-		return ( $this->username === NULL ) ? '' : $this->username;
-	}
-
-	/**
-	 * @param mixed $username
-	 *
-	 * @return Member
-	 */
-	public function setUsername( $username )
-	{
-		$this->username = $username;
 
 		return $this;
 	}
@@ -231,26 +301,6 @@ class Member {
 	public function setZip( $zip )
 	{
 		$this->zip = $zip;
-
-		return $this;
-	}
-
-	/**
-	 * @return mixed
-	 */
-	public function getEmail()
-	{
-		return ( $this->email === NULL ) ? '' : $this->email;
-	}
-
-	/**
-	 * @param mixed $email
-	 *
-	 * @return Member
-	 */
-	public function setEmail( $email )
-	{
-		$this->email = $email;
 
 		return $this;
 	}
@@ -424,5 +474,13 @@ class Member {
 		$this->user = $user;
 
 		return $this;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isMember()
+	{
+		return ( $this->id !== NULL );
 	}
 }

@@ -15,6 +15,7 @@ class Controller {
 	const MENU_MAIN = 'ona_main_menu';
 	const MENU_SECONDARY = 'ona_secondary_menu';
 
+	const OPTION_VERSION = 'ona_white_angus_version';
 	const OPTION_ADDRESS = 'ona_white_angus_address';
 	const OPTION_PHONE = 'ona_white_angus_phone';
 	const OPTION_FACEBOOK = 'ona_white_angus_facebook';
@@ -28,6 +29,9 @@ class Controller {
 
 	private $attributes;
 
+	/** @var Member $member */
+	private $member;
+
 	public function theme_setup()
 	{
 		add_theme_support( 'automatic-feed-links' );
@@ -39,6 +43,75 @@ class Controller {
 			self::MENU_MAIN => __( 'ONA Main Menu', 'ona-white-angus' ),
 			self::MENU_SECONDARY => __( 'ONA Secondary Menu', 'ona-white-angus' )
 		) );
+
+		$this->checkForUpdates();
+
+		if ( is_user_logged_in() )
+		{
+			$this->member = new Member;
+			$this->member->setWpUserId( get_current_user_id() );
+		}
+	}
+
+	public function checkForUpdates()
+	{
+		$version = get_option( self::OPTION_VERSION, '' );
+
+		if ( $version != self::VERSION )
+		{
+			require_once( ABSPATH . '/wp-admin/includes/upgrade.php' );
+			global $wpdb;
+
+			$charset_collate = '';
+			if ( ! empty( $wpdb->charset ) )
+			{
+				$charset_collate .= " DEFAULT CHARACTER SET " . $wpdb->charset;
+			}
+			if ( ! empty( $wpdb->collate ) )
+			{
+				$charset_collate .= " COLLATE " . $wpdb->collate;
+			}
+
+			/* members table */
+			$table = $wpdb->prefix . Member::TABLE_NAME;
+			$sql = "CREATE TABLE " . $table . " (
+					id INT(11) NOT NULL AUTO_INCREMENT,
+					wp_user_id INT(11) DEFAULT NULL,
+					first_name VARCHAR(50) DEFAULT NULL,
+					last_name VARCHAR(50) DEFAULT NULL,
+					farm_name VARCHAR(250) DEFAULT NULL,
+					address VARCHAR(250) DEFAULT NULL,
+					city VARCHAR(50) DEFAULT NULL,
+					state VARCHAR(50) DEFAULT NULL,
+					zip VARCHAR(10) DEFAULT NULL,
+					phone VARCHAR(50) DEFAULT NULL,
+					is_active TINYINT(4) DEFAULT NULL,
+					created_at DATETIME DEFAULT NULL,
+					updated_at DATETIME DEFAULT NULL,
+					PRIMARY KEY  (id),
+					KEY wp_user_id (wp_user_id)
+				)";
+			$sql .= $charset_collate . ";"; // new line to avoid PHP Storm syntax error
+			dbDelta( $sql );
+
+			/* payments table */
+			$table = $wpdb->prefix . Payment::TABLE_NAME;
+			$sql = "CREATE TABLE " . $table . " (
+					id INT(11) NOT NULL AUTO_INCREMENT,
+					member_id INT(11) DEFAULT NULL,
+					payment_amount DECIMAL(11,2) DEFAULT NULL,
+					payment_method VARCHAR(50) DEFAULT NULL,
+					is_annual TINYINT(4) DEFAULT NULL,
+					is_lifetime TINYINT(4) DEFAULT NULL,
+					created_at DATETIME DEFAULT NULL,
+					PRIMARY KEY  (id),
+					KEY member_id (member_id)
+				)";
+			$sql .= $charset_collate . ";"; // new line to avoid PHP Storm syntax error
+			dbDelta( $sql );
+
+			update_option( self::OPTION_VERSION, self::VERSION );
+		}
 	}
 
 	public function enqueue_styles_and_scripts()
@@ -294,6 +367,7 @@ class Controller {
 		add_submenu_page( 'ona_white_angus', 'General Settings', 'General Settings', 'manage_options', 'ona_white_angus' );
 		add_submenu_page( 'ona_white_angus', 'Homepage Boxes', 'Homepage Boxes', 'manage_options', 'ona_white_angus_homepage_boxes', array( $this, 'print_homepage_boxes_page' ) );
 		add_submenu_page( 'ona_white_angus', 'Hover Cow', 'Hover Cow', 'manage_options', 'ona_white_angus_hover_cow', array( $this, 'print_hover_cow_page' ) );
+		add_submenu_page( 'ona_white_angus', 'Members', 'Members', 'manage_options', 'ona_white_angus_members', array( $this, 'print_members_page' ) );
 	}
 
 	public function print_settings_page()
@@ -309,6 +383,11 @@ class Controller {
 	public function print_hover_cow_page()
 	{
 		include( dirname( dirname( __DIR__ ) ) . '/includes/hover_cow.php' );
+	}
+
+	public function print_members_page()
+	{
+		include( dirname( dirname( __DIR__ ) ) . '/includes/members.php' );
 	}
 
 	public function register_settings()

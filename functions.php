@@ -5,6 +5,7 @@ require_once ( 'classes/OnaWhiteAngus/MenuItem.php' );
 require_once ( 'classes/OnaWhiteAngus/HoverCow.php' );
 require_once ( 'classes/OnaWhiteAngus/HomepageBox.php' );
 require_once ( 'classes/OnaWhiteAngus/Member.php' );
+require_once ( 'classes/OnaWhiteAngus/MemberTable.php' );
 require_once ( 'classes/OnaWhiteAngus/Payment.php' );
 
 $ona_controller = new \OnaWhiteAngus\Controller;
