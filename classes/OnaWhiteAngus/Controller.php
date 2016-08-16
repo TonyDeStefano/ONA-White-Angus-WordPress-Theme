@@ -397,7 +397,7 @@ class Controller {
 		$fee = get_option( self::OPTION_LIFETIME_FEE, '' );
 		if ( strlen( $fee ) > 0 )
 		{
-			$fee = preg_replace('/[^0-9.]*/', '', $fee);
+			$fee = preg_replace( '/[^0-9.]*/', '', $fee );
 		}
 
 		return $fee;
@@ -408,7 +408,7 @@ class Controller {
 		$fee =  get_option( self::OPTION_ANNUAL_FEE, '' );
 		if ( strlen( $fee ) > 0 )
 		{
-			$fee = preg_replace('/[^0-9.]*/', '', $fee);
+			$fee = preg_replace( '/[^0-9.]*/', '', $fee );
 		}
 
 		return $fee;
@@ -421,7 +421,7 @@ class Controller {
 		), $attributes );
 
 		ob_start();
-		include( dirname( dirname( __DIR__ ) ) . '/includes/shortcode.php');
+		include( dirname( dirname( __DIR__ ) ) . '/includes/shortcode.php' );
 		$output = ob_get_contents();
 		ob_end_clean();
 		return $output;
@@ -435,5 +435,10 @@ class Controller {
 		}
 
 		return '';
+	}
+
+	public function add_favicon()
+	{
+		echo '<link rel="shortcut icon" href="' . get_stylesheet_directory_uri() . '/img/favicon.ico">';
 	}
 }
