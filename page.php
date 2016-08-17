@@ -28,7 +28,9 @@ global $ona_controller;
 
 						<?php do_action( 'basic_before_page_title' );  ?>
 
-						<h1><?php the_title(); ?></h1>
+						<?php if ( ! has_shortcode( get_the_content(), 'ona_white_angus' ) ) { ?>
+							<h1><?php the_title(); ?></h1>
+						<?php } ?>
 
 						<?php do_action( 'basic_after_page_title' );  ?>
 

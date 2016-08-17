@@ -28,9 +28,54 @@ class Controller {
 	const OPTION_ANNUAL_FEE = 'ona_white_angus_annual_fee';
 
 	private $attributes;
+	private $errors;
 
 	/** @var Member $member */
 	private $member;
+
+	/**
+	 * @return Member
+	 */
+	public function getMember()
+	{
+		return ( $this->member === NULL ) ? new Member : $this->member;
+	}
+
+	/**
+	 * @param Member $member
+	 *
+	 * @return Controller
+	 */
+	public function setMember( $member )
+	{
+		$this->member = $member;
+
+		return $this;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getErrors()
+	{
+		return ( $this->errors === NULL ) ? array() : $this->errors;
+	}
+
+	/**
+	 * @param $error
+	 *
+	 * @return $this
+	 */
+	public function addError( $error )
+	{
+		if( $this->errors === NULL )
+		{
+			$this->errors = array();
+		}
+
+		$this->errors[] = $error;
+		return $this;
+	}
 
 	public function theme_setup()
 	{
@@ -49,7 +94,12 @@ class Controller {
 		if ( is_user_logged_in() )
 		{
 			$this->member = new Member;
-			$this->member->setWpUserId( get_current_user_id() );
+			$this->member->readFromWordPressId( get_current_user_id() );
+
+			if ( $this->member->getWpUserId() !== NULL )
+			{
+				$this->member->setUser( wp_get_current_user() );
+			}
 		}
 	}
 
@@ -77,6 +127,7 @@ class Controller {
 			$sql = "CREATE TABLE " . $table . " (
 					id INT(11) NOT NULL AUTO_INCREMENT,
 					wp_user_id INT(11) DEFAULT NULL,
+					email VARCHAR(50) DEFAULT NULL,
 					first_name VARCHAR(50) DEFAULT NULL,
 					last_name VARCHAR(50) DEFAULT NULL,
 					farm_name VARCHAR(250) DEFAULT NULL,
@@ -519,5 +570,164 @@ class Controller {
 	public function add_favicon()
 	{
 		echo '<link rel="shortcut icon" href="' . get_stylesheet_directory_uri() . '/img/favicon.ico">';
+	}
+
+	public function add_to_querystring( array $args, $remove_old_query_string=FALSE )
+	{
+		$url = $_SERVER['REQUEST_URI'];
+		$parts = explode( '?', $url );
+		$url = $parts[0];
+		$querystring = array();
+		if ( count( $parts ) > 1 )
+		{
+			$parts = explode( '&', $parts[1] );
+			foreach ( $parts as $part )
+			{
+				if ( ! $remove_old_query_string || substr( $part, 0, 3 ) == 'id=' )
+				{
+					$querystring[] = $part;
+				}
+			}
+		}
+
+		foreach ( $args as $key => $val )
+		{
+			$querystring[] = $key . '=' . $val;
+		}
+
+		return $url . ( ( count( $querystring ) > 0 ) ? '?' . implode( '&', $querystring ) : '' );
+	}
+
+	public function form_capture()
+	{
+		if ( isset( $_POST['ona_white_angus_action'] ) )
+		{
+			if ( isset( $_POST['ona_white_angus_nonce'] ) && wp_verify_nonce( $_POST['ona_white_angus_nonce'], 'ona_white_angus_' . $_POST['ona_white_angus_action'] ) )
+			{
+				switch ( $_POST['ona_white_angus_action'] )
+				{
+					case 'signup':
+
+						$current_user = wp_get_current_user();
+
+						if ( strlen( $_POST['email'] ) == 0 )
+						{
+							$this->addError( 'Please enter your email address.' );
+						}
+						elseif ( ! is_email( $_POST['email'] ) )
+						{
+							$this->addError( 'Please enter a valid email address.' );
+						}
+						elseif ( email_exists( $_POST['email'] ) )
+						{
+							if ( ! is_user_logged_in() || strtolower( $current_user->user_email ) != strtolower( $_POST['email'] ) )
+							{
+								$this->addError( 'The email address you entered already exists in our registry.' );
+							}
+						}
+
+						if ( ! is_user_logged_in() )
+						{
+							if ( 4 > strlen( $_POST['username'] ) )
+							{
+								$this->addError( 'Username too short. At least 4 characters is required.' );
+							}
+							elseif ( username_exists( $_POST['username'] ) )
+							{
+								$this->addError( 'Sorry, that username already exists.' );
+							}
+							elseif ( ! validate_username( $_POST['username'] ) )
+							{
+								$this->addError( 'Sorry, the username you entered is not valid.' );
+							}
+
+							if ( 5 > strlen( $_POST['password'] ) )
+							{
+								$this->addError( 'Password length must be greater than 5.' );
+							}
+						}
+
+						if ( strlen( $_POST['fname'] ) == 0 )
+						{
+							$this->addError( 'Please enter your first name.' );
+						}
+
+						if ( strlen( $_POST['lname'] ) == 0 )
+						{
+							$this->addError( 'Please enter your last name.' );
+						}
+
+						if ( strlen( $_POST['address'] ) == 0 )
+						{
+							$this->addError( 'Please enter your address.' );
+						}
+
+						if ( strlen( $_POST['city'] ) == 0 )
+						{
+							$this->addError( 'Please enter your city.' );
+						}
+
+						if ( strlen( $_POST['state'] ) == 0 )
+						{
+							$this->addError( 'Please enter your state.' );
+						}
+
+						if ( strlen( $_POST['zip'] ) == 0 )
+						{
+							$this->addError( 'Please enter your zip code.' );
+						}
+
+						if ( strlen( $_POST['phone'] ) == 0 )
+						{
+							$this->addError( 'Please enter your phone number.' );
+						}
+
+						if ( count( $this->getErrors() ) == 0 )
+						{
+							$member = new Member;
+							$member
+								->setFirstName( $_POST['fname'] )
+								->setLastName( $_POST['lname'] )
+								->setEmail( $_POST['email'] )
+								->setFarmName( $_POST['farm_name'] )
+								->setAddress( $_POST['address'] )
+								->setCity( $_POST['city'] )
+								->setState( $_POST['state'] )
+								->setZip( $_POST['zip'] )
+								->setPhone( $_POST['phone'] );
+
+
+							if ( is_user_logged_in() )
+							{
+								$member->setWpUserId( get_current_user_id() );
+							}
+							else
+							{
+								$user_data = array(
+									'user_login' => $_POST['username'],
+									'user_email' => $_POST['email'],
+									'user_pass'  => $_POST['password'],
+									'first_name' => $_POST['fname'],
+									'last_name'  => $_POST['lname']
+								);
+								$user_id = wp_insert_user( $user_data );
+								$member->setWpUserId( $user_id );
+							}
+
+							$member->create();
+
+							header( 'Location:' . $this->add_to_querystring( array( 'action' => 'registered' ), TRUE ) );
+							exit;
+						}
+
+						break;
+
+				}
+			}
+			else
+			{
+				$this->addError( 'It appears you are submitting this form from a different website' );
+			}
+		}
 	}
 }

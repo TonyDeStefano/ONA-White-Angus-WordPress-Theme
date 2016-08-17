@@ -8,6 +8,7 @@ class Member {
 
 	private $id;
 	private $wp_user_id;
+	private $email;
 	private $first_name;
 	private $last_name;
 	private $farm_name;
@@ -36,7 +37,52 @@ class Member {
 
 	public function create()
 	{
+		/** @var \wpdb $wpdb */
+		global $wpdb;
 
+		if ( $this->wp_user_id !== NULL )
+		{
+			$this
+				->setIsActive( TRUE )
+				->setCreatedAt( time() )
+				->setUpdatedAt( time() );
+
+			$wpdb->insert(
+				$wpdb->prefix . self::TABLE_NAME,
+				array(
+					'wp_user_id' => $this->wp_user_id,
+					'email' => $this->email,
+					'first_name' => $this->first_name,
+					'last_name' => $this->last_name,
+					'farm_name' => $this->farm_name,
+					'address' => $this->address,
+					'city' => $this->city,
+					'state' => $this->state,
+					'zip' => $this->zip,
+					'phone' => $this->phone,
+					'is_active' => ( $this->isActive() ) ? 1 : 0,
+					'created_at' => $this->getCreatedAt( 'Y-m-d H:i:s' ),
+					'updated_at' => $this->getUpdatedAt( 'Y-m-d H:i:s' )
+				),
+				array(
+					'%d',
+					'%s',
+					'%s',
+					'%s',
+					'%s',
+					'%s',
+					'%s',
+					'%s',
+					'%s',
+					'%s',
+					'%d',
+					'%s',
+					'%s'
+				)
+			);
+
+			$this->setId( $wpdb->insert_id );
+		}
 	}
 
 	public function read()
@@ -99,6 +145,7 @@ class Member {
 		$this
 			->setId( $row->id )
 			->setWpUserId( $row->wp_user_id )
+			->setEmail( $row->email )
 			->setFirstName( $row->first_name )
 			->setLastName( $row->last_name )
 			->setFarmName( $row->farm_name )
@@ -153,6 +200,26 @@ class Member {
 	public function setWpUserId( $wp_user_id )
 	{
 		$this->wp_user_id = ( is_numeric( $wp_user_id ) ) ? intval( $wp_user_id ) : NULL;
+
+		return $this;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getEmail()
+	{
+		return ( $this->email === NULL ) ? '' : $this->email;
+	}
+
+	/**
+	 * @param mixed $email
+	 *
+	 * @return Member
+	 */
+	public function setEmail( $email )
+	{
+		$this->email = $email;
 
 		return $this;
 	}

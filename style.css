@@ -2,7 +2,7 @@
  * Theme Name: ONA White Angus
  * Description: Custom theme for the ONA White Angus website
  * Theme URI: http://www.onawhiteangus.com
- * Author: Spokane WordPress Development & Firedove Technology
+ * Author: Scott Williams, Tony DeStefano & Firedove Technology
  * Author URI: http://www.onawhiteangus.com
  * Version: 1.1.6
  * License: GNU General Public License v2 or later
@@ -243,6 +243,18 @@ ul#widgetlist {
 
 ul#widgetlist ul {
     margin-bottom: 15px;
+}
+
+#ona_login_form label {
+    display: block;
+}
+
+#ona_login_form input[type="text"],
+#ona_login_form input[type="password"] {
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #3a3a3a;
+    padding: 4px;
 }
 
 @media only screen and (max-width : 1200px) {

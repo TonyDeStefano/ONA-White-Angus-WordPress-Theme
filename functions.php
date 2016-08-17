@@ -10,6 +10,7 @@ require_once ( 'classes/OnaWhiteAngus/Payment.php' );
 
 $ona_controller = new \OnaWhiteAngus\Controller;
 
+add_action ( 'init', array( $ona_controller, 'form_capture' ) );
 add_action( 'after_setup_theme', array( $ona_controller, 'theme_setup' ) );
 add_action( 'wp_enqueue_scripts', array( $ona_controller, 'enqueue_styles_and_scripts' ) );
 add_action( 'admin_init', array( $ona_controller, 'editor_styles' ) );
