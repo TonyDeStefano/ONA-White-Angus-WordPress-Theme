@@ -257,6 +257,10 @@ ul#widgetlist ul {
     padding: 4px;
 }
 
+a.btn {
+    text-decoration: none !important;
+}
+
 @media only screen and (max-width : 1200px) {
 
     #ona-logo {

@@ -61,7 +61,7 @@ if ( $page == '' )
 
 	<?php } else { ?>
 
-		<?php if ( count( $states ) > 0 ) { ?>
+		<?php if ( count( $states ) > 1 ) { ?>
 			<p class="btn-group">
 				<?php foreach ( $states as $state => $members ) { ?>
 					<a href="#<?php echo $state; ?>" class="btn btn-default btn-xs">
