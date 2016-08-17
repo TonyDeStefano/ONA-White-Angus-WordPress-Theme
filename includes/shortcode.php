@@ -3,6 +3,23 @@
 /** @var \OnaWhiteAngus\Controller $this */
 
 $action = ( isset( $_GET['action'] ) ) ? $_GET['action'] : '';
+$page = ( isset( $_GET['page'] ) ) ? $_GET['page'] : '';
+
+if ( $page == '' )
+{
+	if ( $this->getAttribute( 'page' ) == 'register' )
+	{
+		$page = 'register';
+	}
+	elseif ( $this->getAttribute( 'page' ) == 'resources' )
+	{
+		$page = 'resources';
+	}
+	elseif ( $this->getAttribute( 'page' ) == 'directory' )
+	{
+		$page = 'directory';
+	}
+}
 
 ?>
 
@@ -18,13 +35,13 @@ $action = ( isset( $_GET['action'] ) ) ? $_GET['action'] : '';
 
 <?php } ?>
 
-<?php if ( $this->getAttribute( 'page' ) == 'directory' ) { ?>
+<?php if ( $page == 'directory' ) { ?>
 
 	<p>Directory coming soon ...</p>
 
 <?php } elseif ( ! $this->getMember()->isMember() ) { ?>
 
-	<?php if ( $action == 'registered' ) { ?>
+	<?php if ( $action == 'signedup' ) { ?>
 
 		<div class="alert alert-info">
 			Thank you for registering! You can now log in below.
@@ -34,7 +51,7 @@ $action = ( isset( $_GET['action'] ) ) ? $_GET['action'] : '';
 
 	<div class="row">
 
-		<?php if ( $action != 'registered' ) { ?>
+		<?php if ( $action != 'signedup' ) { ?>
 
 			<div class="col-sm-8">
 
@@ -162,16 +179,16 @@ $action = ( isset( $_GET['action'] ) ) ? $_GET['action'] : '';
 		</div>
 	</div>
 
-<?php } elseif ( $this->getAttribute( 'page' ) == 'register' ) { ?>
+<?php } elseif ( $page == 'register' ) { ?>
 
-	<p>Register Your Animal</p>
+	<h3>Register Your Animal</h3>
 
-<?php } elseif ( $this->getAttribute( 'page' ) == 'resources' ) { ?>
+<?php } elseif ( $page == 'resources' ) { ?>
 
-	<p>Member Resources</p>
+	<h3>Member Resources</h3>
 
 <?php } else { ?>
 
-	<p>My White Angus Account</p>
+	<h3>My White Angus Account</h3>
 
 <?php } ?>

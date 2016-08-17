@@ -716,7 +716,7 @@ class Controller {
 
 							$member->create();
 
-							header( 'Location:' . $this->add_to_querystring( array( 'action' => 'registered' ), TRUE ) );
+							header( 'Location:' . $this->add_to_querystring( array( 'action' => 'signedup' ), TRUE ) );
 							exit;
 						}
 
