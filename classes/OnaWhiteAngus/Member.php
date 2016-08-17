@@ -550,4 +550,38 @@ class Member {
 	{
 		return ( $this->id !== NULL );
 	}
+
+	/**
+	 * @return Member[]
+	 */
+	public static function getActiveMembers()
+	{
+		/** @var \wpdb $wpdb */
+		global $wpdb;
+
+		$members = array();
+
+		$sql = "
+			SELECT
+				*
+			FROM
+				" . $wpdb->prefix . self::TABLE_NAME . "
+			WHERE
+				is_active = 1
+			ORDER BY
+				state ASC,
+				farm_name ASC,
+				last_name ASC,
+				first_name ASC";
+
+		$rows = $wpdb->get_results( $sql );
+		foreach( $rows as $row )
+		{
+			$member = new Member;
+			$member->loadFromRow( $row );
+			$members[ $member->getId() ] = $member;
+		}
+
+		return $members;
+	}
 }

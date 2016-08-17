@@ -37,7 +37,79 @@ if ( $page == '' )
 
 <?php if ( $page == 'directory' ) { ?>
 
-	<p>Directory coming soon ...</p>
+	<h2>Find a Breeder</h2>
+
+	<?php
+
+	$members = \OnaWhiteAngus\Member::getActiveMembers();
+	$states = array();
+	foreach ( $members AS $member )
+	{
+		if ( ! array_key_exists( $member->getState(), $states ) )
+		{
+			$states[ $member->getState() ] = [];
+		}
+
+		$states[ $member->getState() ][] = $member;
+	}
+
+	?>
+
+	<?php if ( count( $states ) == 0 ) { ?>
+
+		<p>Please check back later.</p>
+
+	<?php } else { ?>
+
+		<?php if ( count( $states ) > 0 ) { ?>
+			<p class="btn-group">
+				<?php foreach ( $states as $state => $members ) { ?>
+					<a href="#<?php echo $state; ?>" class="btn btn-default btn-xs">
+						<?php echo $state; ?>
+					</a>
+				<?php } ?>
+			</p>
+		<?php } ?>
+
+		<?php foreach ( $states as $state => $members ) { ?>
+
+			<?php /** @var \OnaWhiteAngus\Member[] $members */ ?>
+
+			<a name="<?php echo $state; ?>"></a>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						<?php echo \OnaWhiteAngus\Controller::get_state_and_abbr( $state ); ?>
+					</h3>
+				</div>
+				<div class="panel-body">
+
+					<?php foreach ( $members as $member ) { ?>
+
+						<p>
+
+							<?php if ( strlen( $member->getFarmName() ) > 0 ) { ?>
+								<strong><?php echo $member->getFarmName(); ?></strong><br>
+								<?php echo $member->getFullName(); ?><br>
+							<?php } else { ?>
+								<strong><?php echo $member->getFullName(); ?></strong><br>
+							<?php } ?>
+							<?php echo $member->getAddress(); ?><br>
+							<?php echo $member->getCity() . ', ' . $member->getState() . ' ' . $member->getZip(); ?><br>
+							<?php echo $member->getPhone(); ?>
+
+						</p>
+
+						<hr>
+
+					<?php } ?>
+
+				</div>
+			</div>
+
+		<?php } ?>
+
+	<?php } ?>
 
 <?php } elseif ( ! $this->getMember()->isMember() ) { ?>
 
@@ -55,7 +127,7 @@ if ( $page == '' )
 
 			<div class="col-sm-8">
 
-				<h3>Join the White Angus Association</h3>
+				<h2>Join the White Angus Association</h2>
 
 				<form method="post">
 
@@ -114,7 +186,14 @@ if ( $page == '' )
 
 					<div class="form-group">
 						<label for="state">State <strong>*</strong></label>
-						<input class="form-control" type="text" id="state" name="state" maxlength="2" value="<?php echo ( isset( $_POST['state'] ) ) ? esc_html( $_POST['state'] ) : ''; ?>">
+						<select class="form-control" id="state" name="state">
+							<?php $temp = ( isset( $_POST['state'] ) ) ? esc_html( $_POST['state'] ) : ''; ?>
+							<?php foreach ( \OnaWhiteAngus\Controller::get_states() as $abbr => $state ) { ?>
+								<option value="<?php echo $abbr; ?>"<?php if ( $temp == $abbr ) { ?> selected<?php } ?>>
+									<?php echo $abbr . ' - ' . $state; ?>
+								</option>
+							<?php } ?>
+						</select>
 					</div>
 
 					<div class="form-group">
@@ -164,7 +243,7 @@ if ( $page == '' )
 
 				?>
 
-				<h3>Already Signed Up?</h3>
+				<h2>Already Signed Up?</h2>
 				<p>If you have a login and password, enter them here.</p>
 
 				<div id="ona_login_form">
@@ -181,14 +260,14 @@ if ( $page == '' )
 
 <?php } elseif ( $page == 'register' ) { ?>
 
-	<h3>Register Your Animal</h3>
+	<h2>Register Your Animal</h2>
 
 <?php } elseif ( $page == 'resources' ) { ?>
 
-	<h3>Member Resources</h3>
+	<h2>Member Resources</h2>
 
 <?php } else { ?>
 
-	<h3>My White Angus Account</h3>
+	<h2>My White Angus Account</h2>
 
 <?php } ?>
