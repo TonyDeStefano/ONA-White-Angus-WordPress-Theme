@@ -41,7 +41,7 @@ if ( $page == '' )
 
 <?php } elseif ( ! $this->getMember()->isMember() ) { ?>
 
-	<?php if ( $action == 'signedup' ) { ?>
+	<?php if ( $action == 'signedup' && ! is_user_logged_in() ) { ?>
 
 		<div class="alert alert-info">
 			Thank you for registering! You can now log in below.
