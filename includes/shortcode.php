@@ -43,21 +43,25 @@ if ( $page == '' )
 
 	$members = \OnaWhiteAngus\Member::getActiveMembers();
 	$states = array();
+
 	foreach ( $members AS $member )
 	{
-		if ( ! array_key_exists( $member->getState(), $states ) )
+		if ( $member->isCurrent() )
 		{
-			$states[ $member->getState() ] = [];
-		}
+			if ( ! array_key_exists( $member->getState(), $states ) )
+			{
+				$states[ $member->getState() ] = [];
+			}
 
-		$states[ $member->getState() ][] = $member;
+			$states[ $member->getState() ][] = $member;
+		}
 	}
 
 	?>
 
 	<?php if ( count( $states ) == 0 ) { ?>
 
-		<p>Please check back later.</p>
+		<p>No breeders were found at this time. Please check back later.</p>
 
 	<?php } else { ?>
 

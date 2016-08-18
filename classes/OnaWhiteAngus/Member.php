@@ -551,6 +551,19 @@ class Member {
 		return ( $this->id !== NULL );
 	}
 
+	public function isCurrent()
+	{
+		foreach( $this->getPayments() as $payment )
+		{
+			if ( $payment->isLifetime() || strtotime( $payment->getCreatedAt() ) > strtotime( '-1 year' ) )
+			{
+				return TRUE;
+			}
+		}
+
+		return FALSE;
+	}
+
 	/**
 	 * @return Member[]
 	 */
@@ -559,27 +572,56 @@ class Member {
 		/** @var \wpdb $wpdb */
 		global $wpdb;
 
+		/** @var Member[] $members */
 		$members = array();
 
 		$sql = "
 			SELECT
-				*
+				m.*,
+				p.id AS payment_id,
+				p.payment_amount,
+				p.payment_method,
+				p.is_annual,
+				p.is_lifetime,
+				p.created_at AS payment_created_at
 			FROM
-				" . $wpdb->prefix . self::TABLE_NAME . "
+				" . $wpdb->prefix . self::TABLE_NAME . " m
+				LEFT JOIN " . $wpdb->prefix . Payment::TABLE_NAME . " p
+					ON m.id = p.member_id
 			WHERE
-				is_active = 1
+				m.is_active = 1
 			ORDER BY
-				state ASC,
-				farm_name ASC,
-				last_name ASC,
-				first_name ASC";
+				m.state ASC,
+				m.farm_name ASC,
+				m.last_name ASC,
+				m.first_name ASC,
+				m.id ASC,
+				p.id DESC";
 
 		$rows = $wpdb->get_results( $sql );
 		foreach( $rows as $row )
 		{
-			$member = new Member;
-			$member->loadFromRow( $row );
-			$members[ $member->getId() ] = $member;
+			if ( ! array_key_exists( $row->id, $members ) )
+			{
+				$member = new Member;
+				$member->loadFromRow( $row );
+				$members[ $member->getId() ] = $member;
+			}
+
+			if ( $row->payment_id !== NULL )
+			{
+				$payment = new Payment;
+				$payment
+					->setId( $row->payment_id )
+					->setMemberId( $row->id )
+					->setPaymentAmount( $row->payment_amount )
+					->setPaymentMethod( $row->payment_method )
+					->setIsAnnual( $row->is_annual )
+					->setIsLifetime( $row->is_lifetime )
+					->setCreatedAt( $row->payment_created_at );
+
+				$members[ $row->id ]->addPayment( $payment );
+			}
 		}
 
 		return $members;
