@@ -75,8 +75,7 @@
 	</div>
 
 	<div class="row hidden-xs">
-		<div class="col-md-2"></div>
-		<div class="col-md-4">
+		<div class="col-sm-6">
 			<div id="ona-silhouette">
 				<img src="<?php bloginfo('template_directory'); ?>/img/silhouette.png">
 				<?php for ( $x = 1; $x <= 12; $x++ ) { ?>
@@ -91,7 +90,7 @@
 				<?php } ?>
 			</div>
 		</div>
-		<div class="col-md-4">
+		<div class="col-sm-6">
 			<div class="ona-silhouette-text">
 				<h2></h2>
 				<p></p>

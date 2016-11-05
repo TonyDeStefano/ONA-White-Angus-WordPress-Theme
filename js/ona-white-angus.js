@@ -2,7 +2,7 @@
 
     $(function(){
 
-        $('#ona-silhouette').on('mouseenter', '.ona-silhouette-over', function(){
+        $('#ona-silhouette').on('click, mouseenter', '.ona-silhouette-over', function(){
             $('.ona-silhouette-over').each(function(){
                 $(this).css('background-color', 'transparent');
             });
